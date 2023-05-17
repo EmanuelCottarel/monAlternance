@@ -4,11 +4,12 @@
     <div class="w-1/3 h-full bg-gray-300">
 
     </div>
-    <form #loginForm="ngForm" class="w-2/3 p-8">
-      <h2 class="text-2xl">Connexion</h2>
+    <form #loginForm="ngForm" (submit)="authenticate()" class="w-2/3 p-8">
+      <h2 class="text-2xl mb-4">Connexion</h2>
 
-      {{ identifier | json }}
+
       <div class="flex flex-col mt-16 h-full gap-3">
+      <div *ngIf="message" class="text-red-700 font-semibold w-full text-center ">{{message}}</div>
         <div>
           <label for="email">Email</label>
           <input type="email" id="email" placeholder="foo@bar.com" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" [(ngModel)]="identifier.email" #email='ngModel' required class="h-[50px] w-full border rounded p-2 mb-4">
@@ -28,8 +29,8 @@
         </div>
 
         <div class="w-full flex justify-between">
-          <button class="w-2/5 border-2 border-blue-500 text-blue-500 font-semibold h-[50px]">S'inscrire</button>
-          <button [disabled]="loginForm.invalid" class="w-2/5 bg-blue-500 text-white font-semibold h-[50px]">Se connecter</button>
+         <a routerLink="/register" class="flex items-center justify-center w-2/5 border-2 border-blue-500 text-blue-500 font-semibold h-[50px]">S'inscrire</a>
+          <button [disabled]="loginForm.invalid"  class="w-2/5 bg-blue-500 text-white font-semibold h-[50px]"> Se connecter</button>
         </div>
       </div>
 

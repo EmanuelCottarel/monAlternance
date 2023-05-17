@@ -12,11 +12,17 @@ export class LoginFormComponent {
   constructor(private loginService : LoginService) {
   }
 
+  message: string = '';
+//this.loginService.errorMessages
   identifier:UserIdentifiers = {'email':'','password':''}
 
   authenticate():void{
     this.loginService.checkLogin(this.identifier)
-      .subscribe(user => console.log(user))
+      .subscribe(jwt => {
+        console.log('jwt:', jwt);
+        this.message = this.loginService.errorMessages
+      })
+
   }
 
 }
