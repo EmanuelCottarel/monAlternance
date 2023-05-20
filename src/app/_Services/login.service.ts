@@ -3,6 +3,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { UserIdentifiers } from "../_Interfaces/userIdentifiers";
 import {Observable, of} from "rxjs";
 import {catchError, map, tap} from 'rxjs/operators';
+import {User} from "../_Interfaces/user";
 
 @Injectable({
   providedIn: 'root'
@@ -24,6 +25,10 @@ export class LoginService {
     return this.http.post(`${this.baseUrl}/auth`, user, this.httpOptions).pipe(
       catchError(this.handleError<UserIdentifiers>('checkLogin'))
     );
+  }
+
+  createUser(user: User): Observable<any>{
+    return this.http.post(`${this.baseUrl}/api/users`, user, this.httpOptions);
   }
 
 
