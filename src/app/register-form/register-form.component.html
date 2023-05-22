@@ -1,7 +1,7 @@
 <main class="bg-blue-500 w-full h-screen flex justify-center items-center">
 
   <div class="h-fit bg-white flex justify-center">
-    <form #registerForm="ngForm" (submit)="register()" class="p-8">
+    <form [formGroup]="registerForm" (ngSubmit)="register()" class="p-8">
       <h2 class="text-2xl mb-4">Inscription</h2>
 
 
@@ -10,33 +10,39 @@
         <div>
           <label for="email">Email</label>
           <input type="email" id="email" placeholder="foo@bar.com" name="email"
-                 pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" [(ngModel)]="user.email" #email='ngModel' required
-                 class="h-[50px] w-full border rounded p-2 mb-4">
-          <div *ngIf="email.invalid && (email.dirty || email.touched)"
-               class="w-full h-[40px] bg-red-300 text-red-800 flex items-center px-2 -mt-5 rounded-b text-sm">
-            <span *ngIf="email.errors?.['required']">L'email est obligatoire</span>
-            <span *ngIf="email.invalid && !email.errors?.['required']">Le format de l'email n'est pas valide</span>
-          </div>
+                 pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+                 required
+                 class="h-[50px] w-full border rounded p-2 mb-4"
+                 formControlName="email">
+                    <div *ngIf="email?.invalid && (email?.dirty || email?.touched)"
+                         class="w-full h-[40px] bg-red-300 text-red-800 flex items-center px-2 -mt-5 rounded-b text-sm">
+                      <span *ngIf="email?.errors?.['required']">L'email est obligatoire</span>
+                      <span *ngIf="email?.invalid && !email?.errors?.['required']">Le format de l'email n'est pas valide</span>
+                    </div>
         </div>
 
         <div class="flex flex-row gap-2">
           <div class="w-1/2">
             <label for="lastName">Nom</label>
-            <input type="text" id="lastName" placeholder="foo" name="lastName" [(ngModel)]="user.lastName"
-                   #lastName='ngModel' required class="h-[50px] w-full border rounded p-2 mb-4">
-            <div *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)"
-                 class="w-full h-[40px] bg-red-300 text-red-800 flex items-center px-2 -mt-5 rounded-b text-sm">
-              <span *ngIf="lastName.errors?.['required']">Le nom est obligatoire</span>
-            </div>
+            <input type="text" id="lastName" placeholder="foo" name="lastName"
+                   required
+                   formControlName="lastName"
+                   class="h-[50px] w-full border rounded p-2 mb-4">
+                        <div *ngIf="lastName?.invalid && (lastName?.dirty || lastName?.touched)"
+                             class="w-full h-[40px] bg-red-300 text-red-800 flex items-center px-2 -mt-5 rounded-b text-sm">
+                          <span *ngIf="lastName?.errors?.['required']">Le nom est obligatoire</span>
+                        </div>
           </div>
 
           <div class="w-1/2">
             <label for="firstName">Prénom</label>
-            <input type="text" id="firstName" placeholder="foo" name="firstName" [(ngModel)]="user.firstName"
-                   #firstName='ngModel' required class="h-[50px] w-full border rounded p-2 mb-4">
-            <div *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)"
+            <input type="text" id="firstName" placeholder="foo" name="firstName"
+                   required
+                   formControlName="firstName"
+                   class="h-[50px] w-full border rounded p-2 mb-4">
+            <div *ngIf="firstName?.invalid && (firstName?.dirty || firstName?.touched)"
                  class="w-full h-[40px] bg-red-300 text-red-800 flex items-center px-2 -mt-5 rounded-b text-sm">
-              <span *ngIf="firstName.errors?.['required']">Le prénom est obligatoire</span>
+              <span *ngIf="firstName?.errors?.['required']">Le prénom est obligatoire</span>
             </div>
           </div>
 
@@ -46,11 +52,12 @@
           <div class="w-1/2">
             <label for="password">Mot de passe</label>
             <input type="password" id="password" placeholder="&bull;&bull;&bull;&bull;&bull;" name="password"
-                   #password="ngModel" [(ngModel)]="user.plainPassword" required
+                   required
+                   formControlName="plainPassword"
                    class="h-[50px] w-full border rounded p-2 mb-4">
-            <div *ngIf="password.invalid && (password.dirty || password.touched)"
+            <div *ngIf="plainPassword?.invalid && (plainPassword?.dirty || plainPassword?.touched)"
                  class="w-full h-[40px] bg-red-300 text-red-800 flex items-center px-2 -mt-5 rounded-b text-sm">
-              <span *ngIf="password.errors?.['required']">Le mot de passe est obligatoire</span>
+              <span *ngIf="plainPassword?.errors?.['required']">Le mot de passe est obligatoire</span>
 
             </div>
           </div>
@@ -58,19 +65,25 @@
             <label for="confirmPassword">Confirmez le mot de passe</label>
             <input type="password" id="confirmPassword" placeholder="&bull;&bull;&bull;&bull;&bull;"
                    name="confirmPassword"
-                   #confirmPassword="ngModel" [(ngModel)]="user.plainPassword" required
+                   formControlName="plainPasswordConfirm"
+                   required
                    class="h-[50px] w-full border rounded p-2 mb-4">
-            <div *ngIf="confirmPassword.invalid && (confirmPassword.dirty || confirmPassword.touched)"
-                 class="w-full h-[40px] bg-red-300 text-red-800 flex items-center px-2 -mt-5 rounded-b text-sm">
-              <span *ngIf="confirmPassword.errors?.['required']">Le mot de passe est obligatoire</span>
-
+            <div
+              *ngIf="(plainPasswordConfirm?.invalid && (plainPasswordConfirm?.dirty || plainPasswordConfirm?.touched)) || registerForm?.errors?.['isNotMatching']"
+              class="w-full h-[40px] bg-red-300 text-red-800 flex items-center px-2 -mt-5 rounded-b text-sm">
+              <span *ngIf="plainPasswordConfirm?.errors?.['required']">Le mot de passe est obligatoire</span>
+              <span *ngIf="registerForm?.errors?.['isNotMatching']">Les mots de passe ne correspondent pas</span>
             </div>
+
+
           </div>
         </div>
 
         <div class="w-full flex justify-center">
-
-          <button [disabled]="registerForm.invalid"  class="flex items-center justify-center w-2/5 bg-blue-500 text-white font-semibold h-[50px]">S'inscrire</button>
+          <button [disabled]="registerForm.invalid"
+                  class="flex items-center justify-center w-2/5 bg-blue-500 text-white font-semibold h-[50px]">
+            S'inscrire
+          </button>
         </div>
       </div>
 
