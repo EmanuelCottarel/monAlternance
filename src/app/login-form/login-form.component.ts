@@ -14,13 +14,16 @@ export class LoginFormComponent {
 
   message: string = '';
 //this.loginService.errorMessages
-  identifier:UserIdentifiers = {'email':'','password':''}
+  identifier:UserIdentifiers = {email:'',password:''}
 
   authenticate():void{
     this.loginService.checkLogin(this.identifier)
-      .subscribe(jwt => {
-        console.log('jwt:', jwt);
+      .subscribe(response => {
         this.message = this.loginService.errorMessages
+        console.log(response.token)
+        localStorage.setItem('jwt',response.token)
+        localStorage.setItem('id',response.id)
+        localStorage.setItem('email',response.email)
       })
 
   }

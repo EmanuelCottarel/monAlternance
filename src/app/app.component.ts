@@ -8,3 +8,5 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'monAlternance';
 }
+
+//Verifier si i ly a le token sinon on renvoi vers login

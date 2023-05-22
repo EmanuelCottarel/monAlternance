@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import { UserIdentifiers } from "../_Interfaces/userIdentifiers";
+import {UserIdentifiers} from "../_Interfaces/userIdentifiers";
 import {Observable, of} from "rxjs";
 import {catchError, map, tap} from 'rxjs/operators';
 import {User} from "../_Interfaces/user";
@@ -23,11 +23,13 @@ export class LoginService {
 
   checkLogin(user: UserIdentifiers) {
     return this.http.post(`${this.baseUrl}/auth`, user, this.httpOptions).pipe(
-      catchError(this.handleError<UserIdentifiers>('checkLogin'))
+      catchError(this.handleError<UserIdentifiers>('checkLogin')
+      )).pipe(
+      map((data: any) => data)
     );
   }
 
-  createUser(user: User): Observable<any>{
+  createUser(user: User): Observable<any> {
     return this.http.post(`${this.baseUrl}/api/users`, user, this.httpOptions);
   }
 
@@ -35,9 +37,9 @@ export class LoginService {
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
 
-      if (error.status === 401){
+      if (error.status === 401) {
         this.errorMessages = 'Identifiants incorrects';
-      }else{
+      } else {
         this.errorMessages = error.message;
       }
       console.log('erreur:', error); // log to console instead
@@ -45,8 +47,6 @@ export class LoginService {
       return of(result as T);
     };
   }
-
-
 
 
 }
