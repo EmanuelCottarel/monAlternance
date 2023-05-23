@@ -1,13 +1,22 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { RouterModule, Routes } from '@angular/router';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {RouterModule, Routes} from '@angular/router';
 import {LoginFormComponent} from "./login-form/login-form.component";
 import {RegisterFormComponent} from "./register-form/register-form.component";
+import {DashboardComponent} from "./dashboard/dashboard.component";
+import {ContainerComponent} from "./container/container.component";
 
 const routes: Routes = [
-  {path: '', redirectTo:'/login', pathMatch:'full'},
-  {path:'login', component: LoginFormComponent},
-  {path:'register', component: RegisterFormComponent}
+  {
+    path: '', component: ContainerComponent, children: [
+      {path: 'dashboard', component: DashboardComponent}
+
+    ]
+  },
+  {path: 'login', component: LoginFormComponent},
+  {path: 'register', component: RegisterFormComponent},
+  {path:'**', redirectTo:'/login'}
+
 ]
 
 @NgModule({
@@ -17,4 +26,5 @@ const routes: Routes = [
   ],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {
+}

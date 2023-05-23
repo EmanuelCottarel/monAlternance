@@ -4,14 +4,17 @@ import {UserIdentifiers} from "../_Interfaces/userIdentifiers";
 import {Observable, of} from "rxjs";
 import {catchError, map, tap} from 'rxjs/operators';
 import {User} from "../_Interfaces/user";
+import { Router } from "@angular/router";
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
 
-  constructor(private http: HttpClient) {
-  }
+  constructor(
+    private http: HttpClient,
+    private router: Router)
+  {}
 
   private baseUrl = 'https://127.0.0.1:8000';
 
@@ -32,6 +35,8 @@ export class LoginService {
   createUser(user: User): Observable<any> {
     return this.http.post(`${this.baseUrl}/api/users`, user, this.httpOptions);
   }
+
+
 
 
   private handleError<T>(operation = 'operation', result?: T) {

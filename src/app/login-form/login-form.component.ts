@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { LoginService } from '../_Services/login.service';
 import { UserIdentifiers } from "../_Interfaces/userIdentifiers";
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-login-form',
@@ -9,7 +10,10 @@ import { UserIdentifiers } from "../_Interfaces/userIdentifiers";
 })
 export class LoginFormComponent {
 
-  constructor(private loginService : LoginService) {
+  constructor(
+    private loginService : LoginService,
+    private router: Router,
+  ) {
   }
 
   message: string = '';
@@ -24,6 +28,7 @@ export class LoginFormComponent {
         localStorage.setItem('jwt',response.token)
         localStorage.setItem('id',response.id)
         localStorage.setItem('email',response.email)
+        this.router.navigate(['/dashboard'])
       })
 
   }

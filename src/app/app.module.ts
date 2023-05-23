@@ -10,6 +10,11 @@ import { RegisterFormComponent } from './register-form/register-form.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { ReactiveFormsModule } from '@angular/forms';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { NavigationComponent } from './navigation/navigation.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { Location } from '@angular/common';
+import { ContainerComponent } from './container/container.component';
 
 
 @NgModule({
@@ -17,9 +22,13 @@ import { ReactiveFormsModule } from '@angular/forms';
     AppComponent,
     LoginFormComponent,
     RegisterFormComponent,
+    DashboardComponent,
+    NavigationComponent,
+    ContainerComponent,
   ],
   imports: [
     BrowserModule,
+    FontAwesomeModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
