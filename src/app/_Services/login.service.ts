@@ -36,9 +36,6 @@ export class LoginService {
     return this.http.post(`${this.baseUrl}/api/users`, user, this.httpOptions);
   }
 
-
-
-
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
 

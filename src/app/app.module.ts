@@ -13,8 +13,9 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { NavigationComponent } from './navigation/navigation.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { Location } from '@angular/common';
 import { ContainerComponent } from './container/container.component';
+import { ApplicationFormComponent } from './_Forms/application-form/application-form.component';
+import { ApplicationListComponent } from './application-list/application-list.component';
 
 
 @NgModule({
@@ -25,6 +26,8 @@ import { ContainerComponent } from './container/container.component';
     DashboardComponent,
     NavigationComponent,
     ContainerComponent,
+    ApplicationFormComponent,
+    ApplicationListComponent,
   ],
   imports: [
     BrowserModule,
