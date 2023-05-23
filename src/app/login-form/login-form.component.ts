@@ -28,7 +28,7 @@ export class LoginFormComponent {
         localStorage.setItem('jwt',response.token)
         localStorage.setItem('id',response.id)
         localStorage.setItem('email',response.email)
-        this.router.navigate(['/dashboard'])
+        this.router.navigate(['/dashboard'],{state:{data:{jwt: response.token}}})
       })
 
   }

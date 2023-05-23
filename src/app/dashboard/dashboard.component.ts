@@ -7,4 +7,7 @@ import { Component } from '@angular/core';
 })
 export class DashboardComponent {
 
+  ngOnInit(){
+    console.log(history.state)
+  }
 }
