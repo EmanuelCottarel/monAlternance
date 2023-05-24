@@ -22,7 +22,7 @@ export class ApplicationService {
     return this.http.post(this.applicationUrl , application, this.httpOptions);
   }
 
-  getApplications(): Observable<Application[]>{
-    return this.http.get<Application[]>(this.applicationUrl)
+  getApplicationsByUser(userId: string | null): Observable<Application[]>{
+    return this.http.get<Application[]>(`${this.applicationUrl}?user=${userId}`)
   }
 }

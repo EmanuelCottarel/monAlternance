@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ApplicationService } from '../_Services/application.service';
 import {Application} from "../_Interfaces/application";
+import {faPhone, faEnvelope, faLink, faHouse} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-application-list',
@@ -14,15 +15,26 @@ export class ApplicationListComponent {
   ) {
   }
 
+  faPhone = faPhone;
+  faEnvelope = faEnvelope;
+  faLink = faLink;
+
   applications: Application[] = [];
 
   ngOnInit(): void
   {
-    this.getApplications();
-  }
-  getApplications(){
-    this.applicationService.getApplications()
-      .subscribe(applications => console.log(applications))
+   this.getApplications();
+
   }
 
+  private userId : string | null = localStorage.getItem('id');
+  getApplications(){
+    this.applicationService.getApplicationsByUser(this.userId)
+      .subscribe(applications => {
+        this.applications = applications;
+        console.log(this.applications)
+      })
+  }
+
+  protected readonly faHouse = faHouse;
 }
