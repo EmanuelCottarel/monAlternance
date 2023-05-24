@@ -1,9 +1,9 @@
-import {Component} from '@angular/core';
+import {Component, Injectable} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 
 import {Application} from "../../_Interfaces/application";
-import {createApplication} from "@angular/platform-browser";
 import {ApplicationService} from "../../_Services/application.service";
+import {ApplicationListComponent} from '../../application-list/application-list.component'
 
 type applicationProperties = keyof Application;
 @Component({
@@ -13,7 +13,10 @@ type applicationProperties = keyof Application;
 })
 export class ApplicationFormComponent {
 
-  constructor(private applicationService : ApplicationService) {
+  constructor(
+    private applicationService : ApplicationService,
+
+  ) {
   }
 
   application: Application = {
@@ -50,5 +53,7 @@ export class ApplicationFormComponent {
 
     this.applicationService.createApplication(this.application)
       .subscribe(el=>{console.log(el)})
+
+
   }
 }

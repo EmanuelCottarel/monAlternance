@@ -1,10 +1,12 @@
 <div class="w-[90px] h-full flex flex-col  items-center">
   <ul class="text-3xl text-white flex flex-col gap-3 mt-8">
-    <li>
+    <li class="flex flex-col items-center">
       <a routerLink="/dashboard" title="Accueil"><fa-icon [icon]="faHouse"></fa-icon></a>
+      <span class="text-sm">Accueil</span>
     </li>
-    <li>
+    <li class="flex flex-col items-center">
       <a routerLink="/login" (click)="logout()" title="Déconnexion" ><fa-icon [icon]="faRightFromBracket"></fa-icon></a>
+    <span class="text-sm">logout</span>
     </li>
   </ul>
 </div>

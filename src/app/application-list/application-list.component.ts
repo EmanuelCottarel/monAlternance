@@ -1,7 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, ElementRef, Injectable, OnInit, ViewChild} from '@angular/core';
 import { ApplicationService } from '../_Services/application.service';
 import {Application} from "../_Interfaces/application";
-import {faPhone, faEnvelope, faLink, faHouse} from '@fortawesome/free-solid-svg-icons';
+import {faPhone, faEnvelope, faLink, faHouse, faPencil, faTrash} from '@fortawesome/free-solid-svg-icons';
+import { ViewContainerRef } from '@angular/core';
+import {ApplicationListElementComponent} from "../application-list-element/application-list-element.component";
+
 
 @Component({
   selector: 'app-application-list',
@@ -11,22 +14,26 @@ import {faPhone, faEnvelope, faLink, faHouse} from '@fortawesome/free-solid-svg-
 export class ApplicationListComponent {
 
   constructor(
-    private applicationService: ApplicationService
+    private applicationService: ApplicationService,
+    private viewContainerRef: ViewContainerRef
   ) {
   }
-
-  faPhone = faPhone;
-  faEnvelope = faEnvelope;
-  faLink = faLink;
 
   applications: Application[] = [];
 
   ngOnInit(): void
   {
    this.getApplications();
-
   }
 
+
+  //////TEST composants dynamiques
+//   @ViewChild('container', { read: ViewContainerRef }) containerRef: ViewContainerRef;
+//   test(){
+//     const componentRef = this.viewContainerRef.createComponent(ApplicationListElementComponent);
+// }
+
+///
   private userId : string | null = localStorage.getItem('id');
   getApplications(){
     this.applicationService.getApplicationsByUser(this.userId)
@@ -35,6 +42,4 @@ export class ApplicationListComponent {
         console.log(this.applications)
       })
   }
-
-  protected readonly faHouse = faHouse;
 }

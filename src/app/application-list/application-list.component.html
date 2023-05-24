@@ -1,37 +1,19 @@
-<table class="w-full mt-16">
-  <thead>
-    <tr>
-      <th class="w-2/12 text-left">Nom de l'entreprise</th>
-      <th class="w-6/12 text-left">Contact</th>
-      <th class="w-1/12">Date d'envoi</th>
-      <th class="w-1/12">Status</th>
-      <th class="w-2/12">Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let application of applications" class="border-b h-16">
-      <td>
-        {{application.webSite}}
-      </td>
-      <td class="flex px-4 items-center h-16">
-        <div class="flex w-3/12 gap-2"><fa-icon [icon]="faPhone"></fa-icon>{{application.phoneNumber}}</div>
-        <div class="flex w-4/12 gap-2"><fa-icon [icon]="faEnvelope"></fa-icon>{{application.email}}</div>
-        <div class="flex w-5/12 gap-2"><fa-icon [icon]="faLink"></fa-icon>{{application.webSite}}</div>
+<!--<div (click)="test()" #container>Test</div>-->
 
-      </td>
-      <td class="text-center">
-        {{application.submitedAt | date:'dd/MM/yy \à H:mm' }}
-      </td>
-      <td class="text-center">
-        {{application.status}}
-      </td>
-      <td class="text-center">
+<div class="flex mt-16 font-semibold">
+  <div class="w-2/12 text-left">Nom de l'entreprise</div>
+  <div class="w-7/12 text-left">Contact</div>
+  <div class="w-1/12 text-center">Date d'envoi</div>
+  <div class="w-1/12 text-center">Status</div>
+  <div class="w-1/12 text-center">Actions</div>
+</div>
 
-      </td>
+<div class="flex flex-col">
+  <app-application-list-element *ngFor="let application of applications"
+                                [application]=application></app-application-list-element>
 
-    </tr>
-  </tbody>
-</table>
+</div>
+
 
 
 

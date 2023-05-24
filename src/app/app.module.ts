@@ -16,6 +16,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ContainerComponent } from './container/container.component';
 import { ApplicationFormComponent } from './_Forms/application-form/application-form.component';
 import { ApplicationListComponent } from './application-list/application-list.component';
+import { ApplicationListElementComponent } from './application-list-element/application-list-element.component';
+import { ApplicationListElementDirective } from './_Helpers/application-list-element.directive';
 
 
 @NgModule({
@@ -28,6 +30,8 @@ import { ApplicationListComponent } from './application-list/application-list.co
     ContainerComponent,
     ApplicationFormComponent,
     ApplicationListComponent,
+    ApplicationListElementComponent,
+    ApplicationListElementDirective,
   ],
   imports: [
     BrowserModule,
