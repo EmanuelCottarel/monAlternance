@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
-import { LoginService } from '../_Services/login.service';
-import { UserIdentifiers } from "../_Interfaces/userIdentifiers";
-import { Router } from "@angular/router";
+import {Component} from '@angular/core';
+import {LoginService} from '../_Services/login.service';
+import {UserIdentifiers} from "../_Interfaces/userIdentifiers";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-login-form',
@@ -11,24 +11,25 @@ import { Router } from "@angular/router";
 export class LoginFormComponent {
 
   constructor(
-    private loginService : LoginService,
+    private loginService: LoginService,
     private router: Router,
   ) {
   }
 
   message: string = '';
 //this.loginService.errorMessages
-  identifier:UserIdentifiers = {email:'',password:''}
+  identifier: UserIdentifiers = {email: '', password: ''}
 
-  authenticate():void{
+  authenticate(): void {
     this.loginService.checkLogin(this.identifier)
       .subscribe(response => {
         this.message = this.loginService.errorMessages
-        console.log(response.token)
-        localStorage.setItem('jwt',response.token)
-        localStorage.setItem('id',response.id)
-        localStorage.setItem('email',response.email)
-        this.router.navigate(['/dashboard'],{state:{data:{jwt: response.token}}})
+        if (response) {
+          localStorage.setItem('jwt', response.token)
+          localStorage.setItem('id', response.id)
+          localStorage.setItem('email', response.email)
+          this.router.navigate(['/dashboard'], {state: {data: {jwt: response.token}}})
+        }
       })
 
   }

@@ -1,9 +1,19 @@
-import {Component, ElementRef, Injectable, OnInit, ViewChild} from '@angular/core';
-import { ApplicationService } from '../_Services/application.service';
+import {
+  Component,
+  createComponent,
+  ElementRef,
+  Injectable,
+  Input,
+  OnInit,
+  SimpleChanges,
+  ViewChild
+} from '@angular/core';
+import {ApplicationService} from '../_Services/application.service';
 import {Application} from "../_Interfaces/application";
 import {faPhone, faEnvelope, faLink, faHouse, faPencil, faTrash} from '@fortawesome/free-solid-svg-icons';
-import { ViewContainerRef } from '@angular/core';
+import {ViewContainerRef} from '@angular/core';
 import {ApplicationListElementComponent} from "../application-list-element/application-list-element.component";
+import {bootstrapApplication} from "@angular/platform-browser";
 
 
 @Component({
@@ -21,21 +31,20 @@ export class ApplicationListComponent {
 
   applications: Application[] = [];
 
-  ngOnInit(): void
-  {
-   this.getApplications();
+  @Input() application!: Application
+
+  ngOnChanges(changes: SimpleChanges) {
+    this.applications.push(this.application)
+  }
+
+  ngOnInit(): void {
+    this.getApplications();
   }
 
 
-  //////TEST composants dynamiques
-//   @ViewChild('container', { read: ViewContainerRef }) containerRef: ViewContainerRef;
-//   test(){
-//     const componentRef = this.viewContainerRef.createComponent(ApplicationListElementComponent);
-// }
+  private userId: string | null = localStorage.getItem('id');
 
-///
-  private userId : string | null = localStorage.getItem('id');
-  getApplications(){
+  getApplications() {
     this.applicationService.getApplicationsByUser(this.userId)
       .subscribe(applications => {
         this.applications = applications;

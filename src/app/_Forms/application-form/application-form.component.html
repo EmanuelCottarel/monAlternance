@@ -7,6 +7,7 @@
       type="text"
       class="h-[50px] w-full border rounded p-2"
       formControlName="companyName"
+      required
     >
   </div>
   <div class="flex flex-col">
@@ -45,7 +46,7 @@
     <input
       id="submitedAt"
       name="submitedAt"
-      type="datetime-local"
+      type="date"
       class="h-[50px] w-full border rounded p-2"
       formControlName="submitedAt"
     >
@@ -65,6 +66,6 @@
     </select>
   </div>
 
-  <button class="w-fit h-[50px] px-4 py-2 bg-cyan-700 text-white font-semibold">Créer</button>
+  <button [disabled]="applicationForm.invalid" class="w-fit h-[50px] px-4 py-2 bg-cyan-700 text-white font-semibold">Créer</button>
 
 </form>
