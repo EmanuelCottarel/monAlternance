@@ -6,7 +6,6 @@ import {ApplicationService} from "../../_Services/application.service";
 import {ApplicationListComponent} from '../../application-list/application-list.component'
 import {NotificationService} from "../../_Services/notification.service";
 
-type applicationProperties = keyof Application;
 
 @Component({
   selector: 'app-application-form',
@@ -44,38 +43,15 @@ export class ApplicationFormComponent {
   //test
   @Output() newApplicationEvent = new EventEmitter();
 
-  addNewApplication(app: Application) {
-    this.newApplicationEvent.emit(app);
-  }
-
-  //
-
   showToasterSuccess() {
     this.notificationService.showSuccess('La candidature a bien été crée', 'Candidature crée!');
   }
 
   onSubmit() {
-    const formValues = this.applicationForm.value;
 
-    for (const formProperty in formValues) {
-      for (const applicationProperty in this.application) {
-        if (formProperty === applicationProperty) {
-          this.application[applicationProperty as applicationProperties] = formValues[formProperty as applicationProperties];
-        }
-      }
+    if (this.applicationForm.valid) {
+      this.newApplicationEvent.emit(this.applicationForm.value);
+      this.applicationForm.reset();
     }
-    this.application.user = 'api/users/' + localStorage.getItem('id')
-
-    this.applicationService.createApplication(this.application)
-      .subscribe(el => {
-        // console.log('el:', el)
-        if (el) {
-          this.addNewApplication(this.application);
-          this.showToasterSuccess();
-
-        }
-      })
-
-
   }
 }

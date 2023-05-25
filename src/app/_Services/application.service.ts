@@ -25,4 +25,8 @@ export class ApplicationService {
   getApplicationsByUser(userId: string | null): Observable<Application[]>{
     return this.http.get<Application[]>(`${this.applicationUrl}?user=${userId}`)
   }
+
+  deleteApplication(application: Application){
+    return this.http.delete(`${this.applicationUrl}/${application.id}`)
+  }
 }

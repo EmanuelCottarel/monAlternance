@@ -33,7 +33,7 @@
   </div>
   <div class="text-center flex justify-center gap-3 w-1/12 items-center">
     <fa-icon [icon]="faPencil" title="Modifier" class="text-yellow-400"></fa-icon>
-    <fa-icon [icon]="faTrash" title="Supprimer" class="text-red-600"></fa-icon>
+    <fa-icon (click)="deleteApplication(application)" [icon]="faTrash" title="Supprimer" class="text-red-600 cursor-pointer"></fa-icon>
   </div>
 </div>
 

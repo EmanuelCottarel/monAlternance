@@ -25,30 +25,35 @@ export class ApplicationListComponent {
 
   constructor(
     private applicationService: ApplicationService,
-    private viewContainerRef: ViewContainerRef
+
   ) {
   }
 
-  applications: Application[] = [];
-
-  @Input() application!: Application
-
-  ngOnChanges(changes: SimpleChanges) {
-    this.applications.push(this.application)
-  }
-
-  ngOnInit(): void {
-    this.getApplications();
-  }
+  @Input() applications!: Application[]
 
 
-  private userId: string | null = localStorage.getItem('id');
 
-  getApplications() {
-    this.applicationService.getApplicationsByUser(this.userId)
-      .subscribe(applications => {
-        this.applications = applications;
-        console.log(this.applications)
-      })
-  }
+  // ngOnChanges(changes: SimpleChanges) {
+  //   // this.applications.push(this.application)
+  //   console.log('changes', changes)
+  //   if (changes['application'].currentValue !== changes['application'].previousValue) {
+  //     this.getApplications();
+  //
+  //   }
+  // }
+
+  // ngOnInit(): void {
+  //   this.getApplications();
+  // }
+
+
+  // private userId: string | null = localStorage.getItem('id');
+
+  // getApplications() {
+  //   this.applicationService.getApplicationsByUser(this.userId)
+  //     .subscribe(applications => {
+  //       this.applications = applications;
+  //       console.log(this.applications)
+  //     })
+  // }
 }
