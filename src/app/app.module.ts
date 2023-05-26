@@ -14,7 +14,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { NavigationComponent } from './navigation/navigation.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ContainerComponent } from './container/container.component';
-import { ApplicationFormComponent } from './_Forms/application-form/application-form.component';
+import { ApplicationFormComponent } from './application-form/application-form.component';
 import { ApplicationListComponent } from './application-list/application-list.component';
 import { ApplicationListElementComponent } from './application-list-element/application-list-element.component';
 

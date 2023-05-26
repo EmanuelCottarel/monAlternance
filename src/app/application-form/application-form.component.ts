@@ -1,11 +1,11 @@
 import {Component, Injectable, Output, EventEmitter} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 
-import {Application} from "../../_Interfaces/application";
-import {ApplicationService} from "../../_Services/application.service";
-import {ApplicationListComponent} from '../../application-list/application-list.component'
-import {NotificationService} from "../../_Services/notification.service";
-
+import {Application} from "../_Interfaces/application";
+import {ApplicationService} from "../_Services/application.service";
+import {ApplicationListComponent} from '../application-list/application-list.component'
+import {NotificationService} from "../_Services/notification.service";
+import {applicationForm} from "../_Forms/formApplication";
 
 @Component({
   selector: 'app-application-form',
@@ -29,28 +29,22 @@ export class ApplicationFormComponent {
     webSite: '',
     status: '',
     user: '',
+    id:'',
   }
 
-  applicationForm: FormGroup = new FormGroup({
-    companyName: new FormControl(this.application.companyName, Validators.required),
-    submitedAt: new FormControl(this.application.submitedAt),
-    email: new FormControl(this.application.email, Validators.email),
-    phoneNumber: new FormControl(this.application.phoneNumber, [Validators.maxLength(10), Validators.minLength(10)]),
-    webSite: new FormControl(this.application.webSite),
-    status: new FormControl(this.application.status)
-  })
+  applicationForm= applicationForm;
 
-  //test
+
   @Output() newApplicationEvent = new EventEmitter();
 
   showToasterSuccess() {
-    this.notificationService.showSuccess('La candidature a bien été crée', 'Candidature crée!');
+    this.notificationService.showSuccess('La candidature a bien été crée','');
   }
 
   onSubmit() {
-
     if (this.applicationForm.valid) {
       this.newApplicationEvent.emit(this.applicationForm.value);
+      this.showToasterSuccess();
       this.applicationForm.reset();
     }
   }

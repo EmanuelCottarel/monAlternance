@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {faEnvelope, faLink, faPencil, faPhone, faTrash} from "@fortawesome/free-solid-svg-icons";
 import {ApplicationListComponent} from "../application-list/application-list.component";
 import {Application} from "../_Interfaces/application";
@@ -12,17 +12,15 @@ import {ApplicationService} from "../_Services/application.service";
 export class ApplicationListElementComponent {
 
   constructor(
-    private applicationListComponent: ApplicationListComponent,
-    private applicationService: ApplicationService
-    ) {
+  ) {
   }
 
-@Input() application!: Application
+  @Input() application!: Application
 
-  deleteApplication(application: Application){
-    console.log(application)
-    this.applicationService.deleteApplication(application)
-      .subscribe()
+  @Output() deleteApplicationEvent = new EventEmitter();
+
+  deleteApplication(application: Application) {
+    this.deleteApplicationEvent.emit(this.application);
   }
 
   protected readonly faPencil = faPencil;

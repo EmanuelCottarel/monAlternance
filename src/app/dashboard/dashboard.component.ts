@@ -24,11 +24,10 @@ export class DashboardComponent {
     this.getApplications()
   }
 
-  getApplications() {
+  public getApplications() {
     this.applicationService.getApplicationsByUser(this.userId)
       .subscribe(applications => {
         this.applications = applications;
-        console.log(this.applications)
       })
   }
 
@@ -36,7 +35,7 @@ export class DashboardComponent {
     app.user= `/api/users/${this.userId}`
     this.applicationService.createApplication(app)
       .subscribe(el => {
-        this.applications.push(app)
+        this.getApplications()
       })
 
   }

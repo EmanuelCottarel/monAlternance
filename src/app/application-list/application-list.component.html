@@ -8,7 +8,8 @@
   </div>
 
   <div class="flex flex-col overflow-scroll h-[700px]">
-    <app-application-list-element *ngFor="let application of applications"
+    <app-application-list-element (deleteApplicationEvent)="deleteApplication($event)"
+      *ngFor="let application of applications"
                                   [application]=application></app-application-list-element>
 
   </div>

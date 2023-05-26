@@ -1,20 +1,11 @@
 import {
   Component,
-  createComponent,
-  ElementRef,
-  Injectable,
   Input,
-  OnInit,
-  SimpleChanges,
-  ViewChild
 } from '@angular/core';
 import {ApplicationService} from '../_Services/application.service';
 import {Application} from "../_Interfaces/application";
-import {faPhone, faEnvelope, faLink, faHouse, faPencil, faTrash} from '@fortawesome/free-solid-svg-icons';
-import {ViewContainerRef} from '@angular/core';
-import {ApplicationListElementComponent} from "../application-list-element/application-list-element.component";
-import {bootstrapApplication} from "@angular/platform-browser";
-
+import {DashboardComponent} from "../dashboard/dashboard.component";
+import {NotificationService} from "../_Services/notification.service";
 
 @Component({
   selector: 'app-application-list',
@@ -25,35 +16,24 @@ export class ApplicationListComponent {
 
   constructor(
     private applicationService: ApplicationService,
+    private dashboardComponent:DashboardComponent,
+    private notificationService: NotificationService
+  ) {}
 
-  ) {
+  deleteApplication(app:Application){
+    this.applicationService.deleteApplication(app)
+      .subscribe(el => {
+        this.dashboardComponent.getApplications();
+        this.showToasterSuccess();
+      });
+  }
+
+  showToasterSuccess() {
+    this.notificationService.showSuccess('La candidature a été supprimé','');
   }
 
   @Input() applications!: Application[]
 
 
 
-  // ngOnChanges(changes: SimpleChanges) {
-  //   // this.applications.push(this.application)
-  //   console.log('changes', changes)
-  //   if (changes['application'].currentValue !== changes['application'].previousValue) {
-  //     this.getApplications();
-  //
-  //   }
-  // }
-
-  // ngOnInit(): void {
-  //   this.getApplications();
-  // }
-
-
-  // private userId: string | null = localStorage.getItem('id');
-
-  // getApplications() {
-  //   this.applicationService.getApplicationsByUser(this.userId)
-  //     .subscribe(applications => {
-  //       this.applications = applications;
-  //       console.log(this.applications)
-  //     })
-  // }
 }
