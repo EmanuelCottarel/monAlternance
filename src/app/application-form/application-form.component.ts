@@ -36,6 +36,7 @@ export class ApplicationFormComponent {
   applicationForm = applicationForm;
 
   @Input() appToUpdate: Application | undefined;
+  @Input() createApp?: boolean;
   @Output() newApplicationEvent = new EventEmitter();
   @Output() closeFormEvent = new EventEmitter();
 
@@ -48,12 +49,11 @@ export class ApplicationFormComponent {
       this.newApplicationEvent.emit(this.applicationForm.value);
       this.showToasterSuccess();
       this.applicationForm.reset();
-
     }
   }
 
   ngOnChanges(){
-    if(this.appToUpdate){
+    if(this.appToUpdate  && !this.createApp){
       console.log('TOTO')
       this.applicationForm.patchValue(this.appToUpdate);
       this.applicationForm.controls['submitedAt'].setValue(this.appToUpdate.submitedAt?.toString().split('T')[0]);

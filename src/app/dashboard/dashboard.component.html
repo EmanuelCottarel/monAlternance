@@ -1,7 +1,7 @@
 <div class="flex">
   <div class="flex flex-col w-full p-8">
     <h1 class="text-2xl">Mes candidatures</h1>
-    <button class="w-fit h-fit px-4 py-2 bg-cyan-700 text-white font-semibold" (click)="toggleFormState();">Ajouter une candidature</button>
+    <button class="w-fit h-fit px-4 py-2 bg-cyan-700 text-white font-semibold" (click)="toggleFormState(); createApp = true">Ajouter une candidature</button>
     <section>
       <app-application-list (updateApplicationEvent)="updateApplication($event)" [applications]="applications"></app-application-list>
     </section>
@@ -12,6 +12,7 @@
         [appToUpdate]="applicationToUpdate"
         (closeFormEvent)="toggleFormState()"
         (newApplicationEvent)="addApplicationListener($event)"
+        [createApp]="createApp"
       ></app-application-form>
     </section>
   </div>

@@ -58,12 +58,14 @@ export class DashboardComponent {
     if (app.id){
       this.applicationService.updateApplication(app)
         .subscribe(el => {
-          this.getApplications()
+          this.getApplications();
+          this.toggleFormState();
         })
     }else{
       this.applicationService.createApplication(app)
         .subscribe(el => {
-          this.getApplications()
+          this.getApplications();
+          this.toggleFormState();
         })
     }
   }
@@ -80,6 +82,8 @@ export class DashboardComponent {
   //Animation form
 
   formState: boolean = false;
+
+  createApp: boolean = false;
 
   toggleFormState() {
     this.formState = !this.formState
