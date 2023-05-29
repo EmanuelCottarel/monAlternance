@@ -21,6 +21,9 @@ export class ApplicationService {
   createApplication(application : Application){
     return this.http.post(this.applicationUrl , application, this.httpOptions);
   }
+  updateApplication(application : Application){
+    return this.http.patch(`${this.applicationUrl}/${application.id}` , application, {headers: new HttpHeaders({'Content-Type': 'application/merge-patch+json'})});
+  }
 
   getApplicationsByUser(userId: string | null): Observable<Application[]>{
     return this.http.get<Application[]>(`${this.applicationUrl}?user=${userId}`)

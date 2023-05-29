@@ -15,7 +15,7 @@
 
   </div>
   <div class="text-center w-1/12 flex items-center justify-center">
-    {{application.submitedAt | date:'dd/MM/yy \à H:mm' }}
+    {{application.submitedAt | date:'dd/MM/yy' }}
   </div>
   <div class="w-1/12 flex items-center justify-center">
         <span *ngIf="application.status === 'declined' "

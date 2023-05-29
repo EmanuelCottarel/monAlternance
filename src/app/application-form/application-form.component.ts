@@ -1,12 +1,10 @@
-import {Component, Injectable, Output, EventEmitter, Input} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {Component, Output, EventEmitter, Input} from '@angular/core';
+import {FormControl} from "@angular/forms";
 
 import {Application} from "../_Interfaces/application";
 import {ApplicationService} from "../_Services/application.service";
-import {ApplicationListComponent} from '../application-list/application-list.component'
 import {NotificationService} from "../_Services/notification.service";
 import {applicationForm} from "../_Forms/formApplication";
-import {animate, state, style, transition, trigger} from "@angular/animations";
 
 @Component({
   selector: 'app-application-form',
@@ -22,6 +20,8 @@ export class ApplicationFormComponent {
   ) {
   }
 
+  title: string = 'Créer une candidature';
+
   application: Application = {
     companyName: '',
     submitedAt: new Date(),
@@ -35,8 +35,9 @@ export class ApplicationFormComponent {
 
   applicationForm = applicationForm;
 
-
+  @Input() appToUpdate: Application | undefined;
   @Output() newApplicationEvent = new EventEmitter();
+  @Output() closeFormEvent = new EventEmitter();
 
   showToasterSuccess() {
     this.notificationService.showSuccess('La candidature a bien été crée', '');
@@ -47,9 +48,24 @@ export class ApplicationFormComponent {
       this.newApplicationEvent.emit(this.applicationForm.value);
       this.showToasterSuccess();
       this.applicationForm.reset();
+
     }
   }
 
-  //update
-  @Input() appToUpdate: Application | undefined;
+  ngOnChanges(){
+    if(this.appToUpdate){
+      console.log('TOTO')
+      this.applicationForm.patchValue(this.appToUpdate);
+      this.applicationForm.controls['submitedAt'].setValue(this.appToUpdate.submitedAt?.toString().split('T')[0]);
+      this.applicationForm.addControl('id', new FormControl(this.appToUpdate.id))
+      this.title='Modifier la candidature';
+    }
+
+  }
+
+  closeForm(){
+    this.closeFormEvent.emit();
+    this.applicationForm.reset();
+  }
+
 }

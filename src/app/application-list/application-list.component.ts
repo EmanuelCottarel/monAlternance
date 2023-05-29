@@ -30,7 +30,6 @@ export class ApplicationListComponent {
 
   @Output() updateApplicationEvent = new EventEmitter();
   updateApplication(app: Application){
-    console.log(app)
     this.updateApplicationEvent.emit(app);
   }
 
@@ -39,7 +38,5 @@ export class ApplicationListComponent {
   }
 
   @Input() applications!: Application[]
-
-
 
 }
