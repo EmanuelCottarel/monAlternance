@@ -1,6 +1,6 @@
 import {
-  Component,
-  Input,
+  Component, EventEmitter,
+  Input, Output,
 } from '@angular/core';
 import {ApplicationService} from '../_Services/application.service';
 import {Application} from "../_Interfaces/application";
@@ -26,6 +26,12 @@ export class ApplicationListComponent {
         this.dashboardComponent.getApplications();
         this.showToasterSuccess();
       });
+  }
+
+  @Output() updateApplicationEvent = new EventEmitter();
+  updateApplication(app: Application){
+    console.log(app)
+    this.updateApplicationEvent.emit(app);
   }
 
   showToasterSuccess() {

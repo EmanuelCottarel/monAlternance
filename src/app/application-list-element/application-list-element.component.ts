@@ -18,9 +18,14 @@ export class ApplicationListElementComponent {
   @Input() application!: Application
 
   @Output() deleteApplicationEvent = new EventEmitter();
+  @Output() updateApplicationEvent = new EventEmitter();
 
   deleteApplication(application: Application) {
     this.deleteApplicationEvent.emit(this.application);
+  }
+
+  editApplication(application: Application){
+    this.updateApplicationEvent.emit(this.application);
   }
 
   protected readonly faPencil = faPencil;

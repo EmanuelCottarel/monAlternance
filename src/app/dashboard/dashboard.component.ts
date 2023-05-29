@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {Application} from "../_Interfaces/application";
 import {ApplicationService} from "../_Services/application.service";
+import {animate, state, style, transition, trigger} from "@angular/animations";
 
 type applicationProperties = keyof Application;
 
@@ -8,7 +9,26 @@ type applicationProperties = keyof Application;
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss']
+  styleUrls: ['./dashboard.component.scss'],
+  animations: [
+    trigger('showFormApplication', [
+      transition(
+        ':enter',
+        [
+          style({ transform: 'translateX(100%)' }),
+          animate('0.3s ease-out',
+            style({ transform: 'translateX(0)' }))
+        ]
+      ),
+      transition(
+        ':leave',
+        [
+          animate('0.3s ease-in',
+            style({ transform: 'translateX(100%)'  }))
+        ]
+      )
+    ])
+  ]
 })
 export class DashboardComponent {
 
@@ -16,6 +36,7 @@ export class DashboardComponent {
     private applicationService: ApplicationService
   ) {
   }
+
   applications: Application[] = [];
 
   private userId: string | null = localStorage.getItem('id');
@@ -32,12 +53,27 @@ export class DashboardComponent {
   }
 
   addApplicationListener(app: Application) {
-    app.user= `/api/users/${this.userId}`
+    app.user = `/api/users/${this.userId}`
     this.applicationService.createApplication(app)
       .subscribe(el => {
         this.getApplications()
       })
+  }
+
+  applicationToUpdate?: Application ;
+  updateApplication(app: Application){
+    this.applicationToUpdate = app;
+    console.log('app to uodate:',app)
+    this.toggleFormState();
 
   }
 
+  //Animation form
+
+  formState: boolean = false;
+  toggleFormState() {
+   this.formState = !this.formState
+  }
+
+  protected readonly console = console;
 }

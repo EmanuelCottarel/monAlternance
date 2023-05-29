@@ -14,7 +14,7 @@
       {{application.webSite}}</div>
 
   </div>
-  <div class="text-center w-1/12 flex items-center">
+  <div class="text-center w-1/12 flex items-center justify-center">
     {{application.submitedAt | date:'dd/MM/yy \à H:mm' }}
   </div>
   <div class="w-1/12 flex items-center justify-center">
@@ -32,7 +32,7 @@
         </span>
   </div>
   <div class="text-center flex justify-center gap-3 w-1/12 items-center">
-    <fa-icon [icon]="faPencil" title="Modifier" class="text-yellow-400"></fa-icon>
+    <fa-icon (click)="editApplication(application)" [icon]="faPencil" title="Modifier" class="text-yellow-400 cursor-pointer"></fa-icon>
     <fa-icon (click)="deleteApplication(application)" [icon]="faTrash" title="Supprimer" class="text-red-600 cursor-pointer"></fa-icon>
   </div>
 </div>
