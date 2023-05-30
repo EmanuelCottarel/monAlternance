@@ -1,4 +1,4 @@
-import {Component, Output, EventEmitter, Input} from '@angular/core';
+import {Component, Output, EventEmitter, Input, OnInit} from '@angular/core';
 import {FormControl} from "@angular/forms";
 
 import {Application} from "../_Interfaces/application";
@@ -12,12 +12,18 @@ import {applicationForm} from "../_Forms/formApplication";
 
 
 })
-export class ApplicationFormComponent {
+export class ApplicationFormComponent implements OnInit{
 
   constructor(
     private applicationService: ApplicationService,
     private notificationService: NotificationService,
   ) {
+  }
+
+  ngOnInit() {
+    if (this.createApp){
+      this.applicationForm.reset();
+    }
   }
 
   title: string = 'Créer une candidature';
@@ -53,16 +59,12 @@ export class ApplicationFormComponent {
   }
 
   ngOnChanges() {
-    if (this.createApp) {
-      console.log('createApp:', this.createApp)
-      this.applicationForm.reset();
-    } else if(!this.createApp && this.appToUpdate) {
+   if(!this.createApp && this.appToUpdate) {
       this.applicationForm.patchValue(this.appToUpdate);
       this.applicationForm.controls['submitedAt'].setValue(this.appToUpdate.submitedAt?.toString().split('T')[0]);
       this.applicationForm.addControl('id', new FormControl(this.appToUpdate.id))
       this.title = 'Modifier la candidature';
     }
-
   }
 
   closeForm() {
