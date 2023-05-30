@@ -10,7 +10,6 @@ type applicationProperties = keyof Application;
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss'],
   animations: [
     trigger('showFormApplication', [
       transition(

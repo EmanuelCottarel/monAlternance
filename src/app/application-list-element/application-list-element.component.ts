@@ -7,7 +7,6 @@ import {ApplicationService} from "../_Services/application.service";
 @Component({
   selector: 'app-application-list-element',
   templateUrl: './application-list-element.component.html',
-  styleUrls: ['./application-list-element.component.scss']
 })
 export class ApplicationListElementComponent {
 

@@ -9,7 +9,7 @@ import {applicationForm} from "../_Forms/formApplication";
 @Component({
   selector: 'app-application-form',
   templateUrl: './application-form.component.html',
-  styleUrls: ['./application-form.component.scss'],
+
 
 })
 export class ApplicationFormComponent {
@@ -52,18 +52,20 @@ export class ApplicationFormComponent {
     }
   }
 
-  ngOnChanges(){
-    if(this.appToUpdate  && !this.createApp){
-      console.log('TOTO')
+  ngOnChanges() {
+    if (this.createApp) {
+      console.log('createApp:', this.createApp)
+      this.applicationForm.reset();
+    } else if(!this.createApp && this.appToUpdate) {
       this.applicationForm.patchValue(this.appToUpdate);
       this.applicationForm.controls['submitedAt'].setValue(this.appToUpdate.submitedAt?.toString().split('T')[0]);
       this.applicationForm.addControl('id', new FormControl(this.appToUpdate.id))
-      this.title='Modifier la candidature';
+      this.title = 'Modifier la candidature';
     }
 
   }
 
-  closeForm(){
+  closeForm() {
     this.closeFormEvent.emit();
     this.applicationForm.reset();
   }
