@@ -17,6 +17,7 @@ import { ContainerComponent } from './container/container.component';
 import { ApplicationFormComponent } from './application-form/application-form.component';
 import { ApplicationListComponent } from './application-list/application-list.component';
 import { ApplicationListElementComponent } from './application-list-element/application-list-element.component';
+import { ApplicationFiltersComponent } from './application-filters/application-filters.component';
 
 
 @NgModule({
@@ -30,6 +31,7 @@ import { ApplicationListElementComponent } from './application-list-element/appl
     ApplicationFormComponent,
     ApplicationListComponent,
     ApplicationListElementComponent,
+    ApplicationFiltersComponent,
   ],
   imports: [
     BrowserModule,

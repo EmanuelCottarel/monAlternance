@@ -2,8 +2,10 @@ import { Injectable } from '@angular/core';
 import {Application} from "../_Interfaces/application";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
+import {DataFilters} from "../_Interfaces/dataFilters";
+import {User} from "../_Interfaces/user";
 
-
+type filterProperties = keyof DataFilters;
 @Injectable({
   providedIn: 'root'
 })
@@ -25,8 +27,19 @@ export class ApplicationService {
     return this.http.patch(`${this.applicationUrl}/${application.id}` , application, {headers: new HttpHeaders({'Content-Type': 'application/merge-patch+json'})});
   }
 
-  getApplicationsByUser(userId: string | null): Observable<Application[]>{
-    return this.http.get<Application[]>(`${this.applicationUrl}?user=${userId}`)
+  getApplicationsByUser(userId: string | null, filters?: DataFilters): Observable<Application[]>{
+    let url: string = `${this.applicationUrl}?user=${userId}&`;
+    if (filters){
+      for (const filter in filters){
+        if (filters[filter as filterProperties]){
+          url = `${url}${filter}=${filters[filter as filterProperties]}&`
+        }
+      }
+    }
+
+    return this.http.get<Application[]>(url)
+
+
   }
 
   deleteApplication(application: Application){

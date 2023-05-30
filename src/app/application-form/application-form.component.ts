@@ -9,8 +9,6 @@ import {applicationForm} from "../_Forms/formApplication";
 @Component({
   selector: 'app-application-form',
   templateUrl: './application-form.component.html',
-
-
 })
 export class ApplicationFormComponent implements OnInit{
 

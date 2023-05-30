@@ -3,6 +3,7 @@ import {Application} from "../_Interfaces/application";
 import {ApplicationService} from "../_Services/application.service";
 import {animate, state, style, transition, trigger} from "@angular/animations";
 import {applicationForm} from "../_Forms/formApplication";
+import {DataFilters} from "../_Interfaces/dataFilters";
 
 type applicationProperties = keyof Application;
 
@@ -45,8 +46,8 @@ export class DashboardComponent {
     this.getApplications()
   }
 
-  public getApplications() {
-    this.applicationService.getApplicationsByUser(this.userId)
+  public getApplications(filters?:DataFilters) {
+    this.applicationService.getApplicationsByUser(this.userId, filters)
       .subscribe(applications => {
         this.applications = applications;
       })
@@ -87,5 +88,7 @@ export class DashboardComponent {
   toggleFormState() {
     this.formState = !this.formState
   }
+
+
 
 }

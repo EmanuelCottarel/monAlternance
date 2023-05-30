@@ -3,6 +3,7 @@
     <h1 class="text-2xl">Mes candidatures</h1>
     <button class="w-fit h-fit px-4 py-2 bg-cyan-700 text-white font-semibold" (click)="toggleFormState(); createApp = true" *ngIf="!createApp">Ajouter une candidature</button>
     <section>
+      <app-application-filters (filterDataEvent)="getApplications($event)"></app-application-filters>
       <app-application-list (updateApplicationEvent)="updateApplication($event)" [applications]="applications"></app-application-list>
     </section>
 
