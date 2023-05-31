@@ -23,12 +23,8 @@ export class LoginFormComponent {
     this.loginService.checkLogin(this.identifier)
       .subscribe(response => {
         this.message = this.loginService.errorMessages
-        if (response) {
-          localStorage.setItem('jwt', response.token)
-          localStorage.setItem('id', response.id)
-          localStorage.setItem('email', response.email)
-          this.router.navigate(['/dashboard'], {state: {data: {jwt: response.token}}})
-        }
+          this.router.navigate(['/dashboard'])
+
       })
 
   }

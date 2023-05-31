@@ -4,6 +4,7 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {DataFilters} from "../_Interfaces/dataFilters";
 import {User} from "../_Interfaces/user";
+import {CookieService} from "ngx-cookie-service";
 
 type filterProperties = keyof DataFilters;
 @Injectable({
@@ -13,7 +14,10 @@ export class ApplicationService {
 
   constructor(
     private http:HttpClient,
+    private cookieService: CookieService
   ) { }
+
+  private userId = this.cookieService.get('id');
 
   private applicationUrl = 'https://127.0.0.1:8000/api/applications'
 
@@ -27,8 +31,8 @@ export class ApplicationService {
     return this.http.patch(`${this.applicationUrl}/${application.id}` , application, {headers: new HttpHeaders({'Content-Type': 'application/merge-patch+json'})});
   }
 
-  getApplicationsByUser(userId: string | null, filters?: DataFilters): Observable<Application[]>{
-    let url: string = `${this.applicationUrl}?user=${userId}&`;
+  getApplicationsByUser(filters?: DataFilters): Observable<Application[]>{
+    let url: string = `${this.applicationUrl}?`;
     if (filters){
       for (const filter in filters){
         if (filters[filter as filterProperties]){
@@ -36,10 +40,7 @@ export class ApplicationService {
         }
       }
     }
-
     return this.http.get<Application[]>(url)
-
-
   }
 
   deleteApplication(application: Application){

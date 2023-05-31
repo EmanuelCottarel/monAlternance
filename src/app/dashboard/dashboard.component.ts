@@ -47,7 +47,7 @@ export class DashboardComponent {
   }
 
   public getApplications(filters?:DataFilters) {
-    this.applicationService.getApplicationsByUser(this.userId, filters)
+    this.applicationService.getApplicationsByUser(filters)
       .subscribe(applications => {
         this.applications = applications;
       })

@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { Router} from "@angular/router";
-import {faCoffee, faHouse, faRightFromBracket} from '@fortawesome/free-solid-svg-icons';
+import {faHouse, faRightFromBracket} from '@fortawesome/free-solid-svg-icons';
+import {LoginService} from "../_Services/login.service";
+
 @Component({
   selector: 'app-navigation',
   templateUrl: './navigation.component.html',
@@ -8,7 +10,7 @@ import {faCoffee, faHouse, faRightFromBracket} from '@fortawesome/free-solid-svg
 export class NavigationComponent {
 
   constructor(
-    private router: Router
+    private loginService:LoginService,
   ) {
   }
 
@@ -16,10 +18,8 @@ export class NavigationComponent {
   faHouse = faHouse;
   faRightFromBracket = faRightFromBracket;
 
-  logout() : Promise<Boolean>   {
-    localStorage.clear()
-    return this.router.navigate(['/login'])
+  logout(){
+    this.loginService.logout();
   }
 
-  protected readonly faCoffee = faCoffee;
 }

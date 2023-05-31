@@ -5,12 +5,12 @@ import {LoginFormComponent} from "./login-form/login-form.component";
 import {RegisterFormComponent} from "./register-form/register-form.component";
 import {DashboardComponent} from "./dashboard/dashboard.component";
 import {ContainerComponent} from "./container/container.component";
+import {authGuard} from "./_Guards/auth.guard"
 
 const routes: Routes = [
   {
-    path: '', component: ContainerComponent, children: [
-      {path: 'dashboard', component: DashboardComponent}
-
+    path: '', component: ContainerComponent, canActivate: [authGuard], children: [
+      {path: 'dashboard', component: DashboardComponent, canActivate: [authGuard]}
     ]
   },
   {path: 'login', component: LoginFormComponent},

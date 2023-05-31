@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { LoginFormComponent } from './login-form/login-form.component';
 import { AppRoutingModule } from './app-routing.module';
-import { HttpClientModule } from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { RegisterFormComponent } from './register-form/register-form.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
@@ -18,6 +18,9 @@ import { ApplicationFormComponent } from './application-form/application-form.co
 import { ApplicationListComponent } from './application-list/application-list.component';
 import { ApplicationListElementComponent } from './application-list-element/application-list-element.component';
 import { ApplicationFiltersComponent } from './application-filters/application-filters.component';
+import {CookieService} from "ngx-cookie-service";
+import {AuthInterceptor} from "./_Interceptors/auth.interceptor";
+import {JwtHelperService, JWT_OPTIONS} from "@auth0/angular-jwt";
 
 
 @NgModule({
@@ -44,7 +47,12 @@ import { ApplicationFiltersComponent } from './application-filters/application-f
     ReactiveFormsModule,
     BrowserAnimationsModule
   ],
-  providers: [],
+  providers: [
+    CookieService,
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
+    JwtHelperService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
