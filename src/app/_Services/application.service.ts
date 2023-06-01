@@ -18,8 +18,9 @@ export class ApplicationService {
   ) { }
 
   private userId = this.cookieService.get('id');
+  private baseUrl = 'https://127.0.0.1:8000/api';
 
-  private applicationUrl = 'https://127.0.0.1:8000/api/applications'
+  private applicationUrl = 'https://127.0.0.1:8000/api/applications';
 
   httpOptions = {
     headers: new HttpHeaders({'Content-Type': 'application/json'})
@@ -41,6 +42,11 @@ export class ApplicationService {
       }
     }
     return this.http.get<Application[]>(url)
+  }
+
+  getApplicationsReminders():Observable<any>{
+    let url:string = `${this.baseUrl}/reminders`;
+    return this.http.get<any>(url);
   }
 
   deleteApplication(application: Application){
