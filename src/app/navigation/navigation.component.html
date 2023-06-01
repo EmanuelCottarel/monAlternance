@@ -1,12 +1,58 @@
-<div class="w-[90px] h-full flex flex-col  items-center">
-  <ul class="text-3xl text-white flex flex-col gap-3 mt-8">
-    <li class="flex flex-col items-center">
-      <a routerLink="/dashboard" title="Accueil"><fa-icon [icon]="faHouse"></fa-icon></a>
-      <span class="text-sm">Accueil</span>
+<div class="w-[90px] h-full flex flex-col items-center">
+  <ul class="text-3xl text-gray-500 flex flex-col gap-5 mt-8">
+    <li class="flex flex-col items-center ">
+      <a routerLink="/dashboard"
+         routerLinkActive #rlaHome="routerLinkActive"
+         title="Accueil"
+         class="flex flex-col items-center">
+          <span
+            class="flex justify-center items-center p-2 h-10 w-10 rounded-full"
+            [ngClass]="rlaHome.isActive? 'link-active':'link-notActive'">
+        <fa-icon [icon]="faHouse" class="text-lg"></fa-icon>
+          </span>
+        <span class="text-sm text-gray-500">Accueil</span>
+      </a>
+
     </li>
     <li class="flex flex-col items-center">
-      <a routerLink="/login" (click)="logout()" title="Déconnexion" ><fa-icon [icon]="faRightFromBracket"></fa-icon></a>
-    <span class="text-sm">logout</span>
+      <a routerLink="/reminder"
+         routerLinkActive #rlaReminder="routerLinkActive"
+         title="Relances"
+         class="flex flex-col items-center">
+          <span
+            class="flex justify-center items-center p-2 h-10 w-10 rounded-full"
+            [ngClass]="rlaReminder.isActive? 'link-active':'link-notActive'">
+            <fa-icon [icon]="faRepeat" class="text-lg"></fa-icon>
+          </span>
+        <span class="text-sm text-gray-500">Relances</span>
+      </a>
+    </li>
+    <li class="flex flex-col items-center">
+      <a routerLink="/logout"
+         routerLinkActive #rlaStat="routerLinkActive"
+         title="Statistiques"
+         class="flex flex-col items-center group">
+        <span class="flex justify-center items-center p-2 h-10 w-10 rounded-full"
+              [ngClass]="rlaStat.isActive? 'link-active':'link-notActive'">
+          <fa-icon [icon]="faChartLine" class="text-lg"></fa-icon>
+        </span>
+        <span class="text-sm text-gray-500">Statistiques</span>
+      </a>
+    </li>
+    <li class="flex flex-col items-center">
+      <a
+        routerLink="/login"
+        routerLinkActive #rlaLogout="routerLinkActive"
+        (click)="logout()"
+        title="Déconnexion"
+        class="flex flex-col items-center group">
+          <span
+            [ngClass]="rlaLogout.isActive? 'link-active':'link-notActive'"
+            class="flex justify-center items-center p-2 h-10 w-10 rounded-full">
+        <fa-icon [icon]="faRightFromBracket" class="text-lg"></fa-icon>
+          </span>
+        <span class="text-sm text-gray-500">logout</span>
+      </a>
     </li>
   </ul>
 </div>

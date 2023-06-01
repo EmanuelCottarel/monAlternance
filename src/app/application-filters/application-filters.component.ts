@@ -9,16 +9,7 @@ import {FormGroup} from "@angular/forms";
 })
 export class ApplicationFiltersComponent {
 
-  filters: ApplicationFilters = {
-    status: null,
-    companyName: null,
-  }
-
   filtersForm: FormGroup = filtersForm
-
-  test() {
-    console.log(this.filters)
-  }
 
   @Output() filterDataEvent = new EventEmitter();
 
@@ -26,7 +17,5 @@ export class ApplicationFiltersComponent {
     this.filterDataEvent.emit(this.filtersForm.value)
     console.log(this.filtersForm.value)
   }
-
-  protected readonly console = console;
 
 }

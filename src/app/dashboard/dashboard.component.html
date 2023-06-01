@@ -1,19 +1,25 @@
 <div class="flex">
-  <div class="flex flex-col w-full p-8">
-    <h1 class="text-2xl">Mes candidatures</h1>
-    <button class="w-fit h-fit px-4 py-2 bg-cyan-700 text-white font-semibold" (click)="toggleFormState(); createApp = true" *ngIf="!createApp">Ajouter une candidature</button>
-    <section>
+  <section class="flex flex-col w-full p-8">
+    <div class="flex justify-between">
+      <h1 class="text-2xl">Mes candidatures</h1>
+      <button class="w-fit h-fit px-4 py-2 bg-blue-500 text-white font-semibold rounded"
+              (click)="toggleFormState(); createApp = true" *ngIf="!createApp">Ajouter une candidature
+      </button>
+    </div>
+    <div>
       <app-application-filters (filterDataEvent)="getApplications($event)"></app-application-filters>
-      <app-application-list (updateApplicationEvent)="updateApplication($event)" [applications]="applications"></app-application-list>
-    </section>
+      <app-application-list (updateApplicationEvent)="updateApplication($event)"
+                            [applications]="applications"></app-application-list>
+    </div>
 
-  </div>
-    <section class="w-4/12 shadow-[-10px_0px_10px_0px_rgba(0,0,0,0.1)]" [@showFormApplication]="formState" *ngIf="formState">
-      <app-application-form
-        [appToUpdate]="applicationToUpdate"
-        (closeFormEvent)="toggleFormState(); createApp = false"
-        (newApplicationEvent)="addApplicationListener($event)"
-        [createApp]="createApp"
-      ></app-application-form>
-    </section>
-  </div>
+  </section>
+  <section class="w-4/12 shadow-[-5px_0px_10px_0px_rgba(0,0,0,0.1)]" [@showFormApplication]="formState"
+           *ngIf="formState">
+    <app-application-form
+      [appToUpdate]="applicationToUpdate"
+      (closeFormEvent)="toggleFormState(); createApp = false"
+      (newApplicationEvent)="addApplicationListener($event)"
+      [createApp]="createApp"
+    ></app-application-form>
+  </section>
+</div>

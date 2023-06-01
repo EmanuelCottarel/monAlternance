@@ -50,11 +50,11 @@ export class LoginService {
   }
 
   isAuthenticated(): Boolean {
-    if (!this.cookieService.get('token')) {
-      if (this.jwtHelper.isTokenExpired(this.cookieService.get('token'))) {
-        this.router.navigate(['/login'])
+    if (!this.cookieService.get('token') || this.jwtHelper.isTokenExpired(this.cookieService.get('token')) ) {
+        this.cookieService.deleteAll();
+        this.router.navigate(['/login']);
         return false;
-      }
+
     }
     return true
   }

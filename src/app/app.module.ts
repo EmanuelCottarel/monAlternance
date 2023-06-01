@@ -21,6 +21,7 @@ import { ApplicationFiltersComponent } from './application-filters/application-f
 import {CookieService} from "ngx-cookie-service";
 import {AuthInterceptor} from "./_Interceptors/auth.interceptor";
 import {JwtHelperService, JWT_OPTIONS} from "@auth0/angular-jwt";
+import { ReminderComponent } from './reminder/reminder.component';
 
 
 @NgModule({
@@ -35,6 +36,7 @@ import {JwtHelperService, JWT_OPTIONS} from "@auth0/angular-jwt";
     ApplicationListComponent,
     ApplicationListElementComponent,
     ApplicationFiltersComponent,
+    ReminderComponent,
   ],
   imports: [
     BrowserModule,

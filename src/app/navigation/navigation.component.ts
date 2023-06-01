@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router} from "@angular/router";
-import {faHouse, faRightFromBracket} from '@fortawesome/free-solid-svg-icons';
+import {faHouse, faRightFromBracket, faRepeat, faChartLine} from '@fortawesome/free-solid-svg-icons';
 import {LoginService} from "../_Services/login.service";
 
 @Component({
@@ -17,6 +17,8 @@ export class NavigationComponent {
   //FontAwesome
   faHouse = faHouse;
   faRightFromBracket = faRightFromBracket;
+  faRepeat = faRepeat
+  faChartLine = faChartLine
 
   logout(){
     this.loginService.logout();

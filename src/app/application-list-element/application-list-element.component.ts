@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {faEnvelope, faLink, faPencil, faPhone, faTrash} from "@fortawesome/free-solid-svg-icons";
+import {faEnvelope, faLink, faPencil, faPhone, faTrash, faEllipsis} from "@fortawesome/free-solid-svg-icons";
 import {ApplicationListComponent} from "../application-list/application-list.component";
 import {Application} from "../_Interfaces/application";
 import {ApplicationService} from "../_Services/application.service";
@@ -32,6 +32,7 @@ export class ApplicationListElementComponent {
   protected readonly faLink = faLink;
   protected readonly faTrash = faTrash;
   protected readonly faPhone = faPhone;
+  protected readonly faEllipsis = faEllipsis
 
 
 }

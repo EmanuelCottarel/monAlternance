@@ -1,6 +1,6 @@
 <form (change)="sendSearchFilter()" [formGroup]="filtersForm" class="flex gap-3 mt-8">
   <input placeholder="Nom de l'entreprise" formControlName="companyName" type="text" class="h-[50px] border rounded p-2">
-  <select formControlName="status" name="" id="" class="h-[50px] w-fit border rounded p-2">
+  <select formControlName="status" class="h-[50px] w-fit border rounded p-2 bg-white">
     <option value="" selected>Status</option>
     <option value="accepted">Acceptée</option>
     <option value="waiting">En attente</option>

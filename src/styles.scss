@@ -5,3 +5,19 @@
 
 @import "src/assets/form.scss";
 @import 'ngx-toastr/toastr';
+
+.link-active{
+  background-color: #3b82f6;
+  color:white;
+  &:hover{
+    color: #3b82f6;
+    background-color: white;
+  }
+}
+
+.link-notActive{
+  &:hover{
+    background-color: white;
+    color:#3b82f6;
+  }
+}
