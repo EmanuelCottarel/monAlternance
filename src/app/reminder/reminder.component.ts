@@ -11,7 +11,8 @@ export class ReminderComponent implements OnInit{
   constructor(private applicationService: ApplicationService) {
   }
 
-  applicationList?: any
+  applicationList?: any;
+  sendRemindersAfterDays: Number = 7;
 
   getRemindersList(){
     this.applicationService.getApplicationsReminders()

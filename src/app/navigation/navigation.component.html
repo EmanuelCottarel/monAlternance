@@ -40,6 +40,19 @@
       </a>
     </li>
     <li class="flex flex-col items-center">
+      <a routerLink="/profile"
+         routerLinkActive #rlaStat="routerLinkActive"
+         title="Profil"
+         class="flex flex-col items-center group">
+        <span class="flex justify-center items-center p-2 h-10 w-10 rounded-full"
+              [ngClass]="rlaStat.isActive? 'link-active':'link-notActive'">
+          <fa-icon [icon]="faUser" class="text-lg"></fa-icon>
+        </span>
+        <span class="text-sm text-gray-500">Mon profil</span>
+      </a>
+    </li>
+
+    <li class="flex flex-col items-center">
       <a
         routerLink="/login"
         routerLinkActive #rlaLogout="routerLinkActive"

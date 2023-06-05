@@ -4,6 +4,7 @@ import {ApplicationService} from "../_Services/application.service";
 import {animate, state, style, transition, trigger} from "@angular/animations";
 import {applicationForm} from "../_Forms/formApplication";
 import {DataFilters} from "../_Interfaces/dataFilters";
+import {CookieService} from "ngx-cookie-service";
 
 type applicationProperties = keyof Application;
 
@@ -34,13 +35,14 @@ type applicationProperties = keyof Application;
 export class DashboardComponent {
 
   constructor(
-    private applicationService: ApplicationService
+    private applicationService: ApplicationService,
+    private cookieService: CookieService
   ) {
   }
 
   applications: Application[] = [];
 
-  private userId: string | null = localStorage.getItem('id');
+  private userId: string | null = this.cookieService.get('id');
 
   ngOnInit() {
     this.getApplications()

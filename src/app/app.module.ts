@@ -22,6 +22,8 @@ import {CookieService} from "ngx-cookie-service";
 import {AuthInterceptor} from "./_Interceptors/auth.interceptor";
 import {JwtHelperService, JWT_OPTIONS} from "@auth0/angular-jwt";
 import { ReminderComponent } from './reminder/reminder.component';
+import { SettingsComponent } from './settings/settings.component';
+import { ProfileComponent } from './profile/profile.component';
 
 
 @NgModule({
@@ -37,6 +39,8 @@ import { ReminderComponent } from './reminder/reminder.component';
     ApplicationListElementComponent,
     ApplicationFiltersComponent,
     ReminderComponent,
+    SettingsComponent,
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,
