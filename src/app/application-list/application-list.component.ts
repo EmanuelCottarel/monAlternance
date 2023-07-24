@@ -1,11 +1,9 @@
-import {
-  Component, EventEmitter,
-  Input, Output,
-} from '@angular/core';
+import {Component, EventEmitter, Input, Output,} from '@angular/core';
 import {ApplicationService} from '../_Services/application.service';
 import {Application} from "../_Interfaces/application";
 import {DashboardComponent} from "../dashboard/dashboard.component";
-import {NotificationService} from "../_Services/notification.service";
+import {faEllipsis, faEnvelope, faLink, faPencil, faPhone, faTrash} from "@fortawesome/free-solid-svg-icons";
+
 
 @Component({
   selector: 'app-application-list',
@@ -16,26 +14,33 @@ export class ApplicationListComponent {
   constructor(
     private applicationService: ApplicationService,
     private dashboardComponent:DashboardComponent,
-    private notificationService: NotificationService
   ) {}
+
+  @Input() applications!: Application[];
+  @Output() updateApplicationEvent = new EventEmitter();
+
+  protected readonly faPencil = faPencil;
+  protected readonly faEnvelope = faEnvelope;
+  protected readonly faLink = faLink;
+  protected readonly faTrash = faTrash;
+  protected readonly faPhone = faPhone;
+  protected readonly faEllipsis = faEllipsis
+
 
   deleteApplication(app:Application){
     this.applicationService.deleteApplication(app)
       .subscribe(el => {
         this.dashboardComponent.getApplications();
-        this.showToasterSuccess();
       });
   }
 
-  @Output() updateApplicationEvent = new EventEmitter();
   updateApplication(app: Application){
     this.updateApplicationEvent.emit(app);
   }
 
-  showToasterSuccess() {
-    this.notificationService.showSuccess('La candidature a été supprimé','');
-  }
 
-  @Input() applications!: Application[]
+
+
+
 
 }

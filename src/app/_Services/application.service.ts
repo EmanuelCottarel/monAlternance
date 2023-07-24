@@ -5,6 +5,9 @@ import {Observable} from "rxjs";
 import {DataFilters} from "../_Interfaces/dataFilters";
 import {User} from "../_Interfaces/user";
 import {CookieService} from "ngx-cookie-service";
+import {tap} from "rxjs/operators";
+import {ToastrService} from "ngx-toastr";
+import {NotificationService} from "./notification.service";
 
 type filterProperties = keyof DataFilters;
 @Injectable({
@@ -14,7 +17,8 @@ export class ApplicationService {
 
   constructor(
     private http:HttpClient,
-    private cookieService: CookieService
+    private cookieService: CookieService,
+    private notificationService: NotificationService
   ) { }
 
   private userId = this.cookieService.get('id');
@@ -26,7 +30,7 @@ export class ApplicationService {
     headers: new HttpHeaders({'Content-Type': 'application/json'})
   };
   createApplication(application : Application){
-    return this.http.post(this.applicationUrl , application, this.httpOptions);
+    return this.http.post(`${this.baseUrl}/application/create` , application, this.httpOptions);
   }
   updateApplication(application : Application){
     return this.http.patch(`${this.applicationUrl}/${application.id}` , application, {headers: new HttpHeaders({'Content-Type': 'application/merge-patch+json'})});
@@ -50,6 +54,11 @@ export class ApplicationService {
   }
 
   deleteApplication(application: Application){
-    return this.http.delete(`${this.applicationUrl}/${application.id}`)
+    return this.http.delete(`${this.applicationUrl}/${application.id}`).pipe(
+      tap(_=>{
+        this.notificationService.showSuccess('La candidature a été supprimé','');
+
+      })
+    )
   }
 }

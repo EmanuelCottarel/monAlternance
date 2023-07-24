@@ -8,11 +8,56 @@
   </div>
 
   <div class="flex flex-col overflow-scroll h-[700px]">
-    <app-application-list-element
-      (deleteApplicationEvent)="deleteApplication($event)"
-      (updateApplicationEvent)="updateApplication($event)"
-      *ngFor="let application of applications"
-                                  [application]=application></app-application-list-element>
+
+<div *ngFor="let application of applications">
+    <div class="border-b h-16 w-full flex hover:bg-blue-50 pl-4">
+      <div class="w-2/12 flex items-center">
+        <span class="mr-8 flex justify-center items-center text-xl cursor-grab w-8 h-8 rounded-full hover:bg-white"> <fa-icon [icon]="faEllipsis"></fa-icon></span>
+        {{application.companyName}}
+      </div>
+      <div class="flex px-4 items-center h-16 w-7/12">
+        <div class="flex w-3/12 gap-2">
+          <fa-icon [icon]="faPhone"></fa-icon>
+          {{application.phoneNumber}}</div>
+        <div class="flex w-4/12 gap-2">
+          <fa-icon [icon]="faEnvelope"></fa-icon>
+          {{application.email}}</div>
+        <div class="flex w-5/12 gap-2">
+          <fa-icon [icon]="faLink"></fa-icon>
+          <a href="{{application.webSite}}">{{application.webSite}}</a></div>
+
+      </div>
+      <div class="text-center w-1/12 flex items-center justify-center">
+        {{application.submitedAt | date:'dd/MM/yy' }}
+      </div>
+      <div class="w-1/12 flex items-center justify-center" [ngSwitch]="application.status">
+        <span
+              class="text-center bg-red-200 rounded-full w-[100px] h-fit px-2 py-1 border border-red-600 text-red-600"
+        *ngSwitchCase="'Refusée'"
+        >
+        {{application.status}}
+        </span>
+        <span
+              class="text-center bg-orange-200 rounded-full w-[100px] h-fit px-2 py-1 border border-orange-400 text-orange-600"
+              *ngSwitchCase="'En attente'">
+        {{application.status}}
+        </span>
+        <span
+              class="text-center bg-green-200 rounded-full w-[100px] h-fit px-2 py-1 border border-green-600 text-green-600"
+              *ngSwitchCase="'Acceptée'">
+        {{application.status}}
+        </span>
+      </div>
+      <div class="text-center flex justify-center gap-3 w-1/12 items-center">
+        <fa-icon (click)="updateApplication(application)" [icon]="faPencil" title="Modifier" class="text-yellow-400 cursor-pointer"></fa-icon>
+        <fa-icon (click)="deleteApplication(application)" [icon]="faTrash" title="Supprimer" class="text-red-600 cursor-pointer"></fa-icon>
+      </div>
+    </div>
+</div>
+
+
+
+
 
   </div>
 

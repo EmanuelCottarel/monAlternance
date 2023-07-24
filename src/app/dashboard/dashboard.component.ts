@@ -1,8 +1,7 @@
 import {Component} from '@angular/core';
 import {Application} from "../_Interfaces/application";
 import {ApplicationService} from "../_Services/application.service";
-import {animate, state, style, transition, trigger} from "@angular/animations";
-import {applicationForm} from "../_Forms/formApplication";
+import {animate, style, transition, trigger} from "@angular/animations";
 import {DataFilters} from "../_Interfaces/dataFilters";
 import {CookieService} from "ngx-cookie-service";
 

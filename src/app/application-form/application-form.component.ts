@@ -1,4 +1,4 @@
-import {Component, Output, EventEmitter, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormControl} from "@angular/forms";
 
 import {Application} from "../_Interfaces/application";
@@ -7,10 +7,10 @@ import {NotificationService} from "../_Services/notification.service";
 import {applicationForm} from "../_Forms/formApplication";
 
 @Component({
-  selector: 'app-application-form',
-  templateUrl: './application-form.component.html',
-})
-export class ApplicationFormComponent implements OnInit{
+             selector: 'app-application-form',
+             templateUrl: './application-form.component.html',
+           })
+export class ApplicationFormComponent implements OnInit {
 
   constructor(
     private applicationService: ApplicationService,
@@ -19,23 +19,12 @@ export class ApplicationFormComponent implements OnInit{
   }
 
   ngOnInit() {
-    if (this.createApp){
+    if (this.createApp) {
       this.applicationForm.reset();
     }
   }
 
   title: string = 'Créer une candidature';
-
-  application: Application = {
-    companyName: '',
-    submitedAt: new Date(),
-    email: '',
-    phoneNumber: '',
-    webSite: '',
-    status: '',
-    user: '',
-    id: '',
-  }
 
   applicationForm = applicationForm;
 
@@ -57,7 +46,8 @@ export class ApplicationFormComponent implements OnInit{
   }
 
   ngOnChanges() {
-   if(!this.createApp && this.appToUpdate) {
+    if (!this.createApp && this.appToUpdate) {
+      console.log(this.appToUpdate)
       this.applicationForm.patchValue(this.appToUpdate);
       this.applicationForm.controls['submitedAt'].setValue(this.appToUpdate.submitedAt?.toString().split('T')[0]);
       this.applicationForm.addControl('id', new FormControl(this.appToUpdate.id))

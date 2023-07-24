@@ -2,12 +2,9 @@
   <h2 class="text-2xl">Relances</h2>
   <div *ngFor="let app of applicationList" class="mt-8">
     <h2 class="text-xl">Relance à envoyer le: {{app[0]}}</h2>
-    <app-application-list-element
-      *ngFor="let application of app[1]"
-      [application]=application></app-application-list-element>
+
   </div>
 
-<!--<button (click)="test()">test</button>-->
 </main>
 
 

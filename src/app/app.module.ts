@@ -16,7 +16,6 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ContainerComponent } from './container/container.component';
 import { ApplicationFormComponent } from './application-form/application-form.component';
 import { ApplicationListComponent } from './application-list/application-list.component';
-import { ApplicationListElementComponent } from './application-list-element/application-list-element.component';
 import { ApplicationFiltersComponent } from './application-filters/application-filters.component';
 import {CookieService} from "ngx-cookie-service";
 import {AuthInterceptor} from "./_Interceptors/auth.interceptor";
@@ -36,7 +35,6 @@ import { ProfileComponent } from './profile/profile.component';
     ContainerComponent,
     ApplicationFormComponent,
     ApplicationListComponent,
-    ApplicationListElementComponent,
     ApplicationFiltersComponent,
     ReminderComponent,
     SettingsComponent,
