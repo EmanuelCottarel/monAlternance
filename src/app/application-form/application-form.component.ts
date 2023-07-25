@@ -34,7 +34,6 @@ export class ApplicationFormComponent implements OnInit {
     }
   }
 
-
   onSubmit() {
 
     if (this.appToUpdate){

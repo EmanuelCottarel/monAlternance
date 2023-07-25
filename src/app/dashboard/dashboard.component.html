@@ -7,7 +7,6 @@
       </button>
     </div>
     <div>
-      <app-application-filters (filterDataEvent)="getApplications($event)"></app-application-filters>
       <app-application-list (updateApplicationEvent)="updateApplication($event)"
                             [applications]="applications"></app-application-list>
     </div>
