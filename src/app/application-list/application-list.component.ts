@@ -26,14 +26,12 @@ export class ApplicationListComponent {
   protected readonly faPhone = faPhone;
   protected readonly faEllipsis = faEllipsis
 
-
   deleteApplication(app:Application){
     this.applicationService.deleteApplication(app)
       .subscribe(el => {
         this.dashboardComponent.getApplications();
       });
   }
-
   updateApplication(app: Application){
     this.updateApplicationEvent.emit(app);
   }

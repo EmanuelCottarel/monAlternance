@@ -18,7 +18,6 @@
     <app-application-form
       [appToUpdate]="applicationToUpdate"
       (closeFormEvent)="toggleFormState(); createApp = false"
-      (newApplicationEvent)="addApplicationListener($event)"
       [createApp]="createApp"
     ></app-application-form>
   </section>

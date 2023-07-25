@@ -18,29 +18,36 @@ export class ApplicationFormComponent implements OnInit {
   ) {
   }
 
-  ngOnInit() {
-    if (this.createApp) {
-      this.applicationForm.reset();
-    }
-  }
 
   title: string = 'Créer une candidature';
-
   applicationForm = applicationForm;
+
 
   @Input() appToUpdate: Application | undefined;
   @Input() createApp?: boolean;
   @Output() newApplicationEvent = new EventEmitter();
   @Output() closeFormEvent = new EventEmitter();
 
-  showToasterSuccess() {
-    this.notificationService.showSuccess('La candidature a bien été crée', '');
+  ngOnInit() {
+    if (this.createApp) {
+      this.applicationForm.reset();
+    }
   }
 
+
   onSubmit() {
+
+    if (this.appToUpdate){
+      this.applicationForm.addControl('id', this.appToUpdate.id)
+      this.applicationService.updateApplication(applicationForm.getRawValue())
+          .subscribe(el => {
+          })
+    }else{
+      this.applicationService.createApplication(applicationForm.getRawValue())
+          .subscribe(el => {
+          })
+    }
     if (this.applicationForm.valid) {
-      this.newApplicationEvent.emit(this.applicationForm.value);
-      this.showToasterSuccess();
       this.applicationForm.reset();
     }
   }

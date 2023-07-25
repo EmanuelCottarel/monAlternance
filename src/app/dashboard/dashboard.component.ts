@@ -40,7 +40,7 @@ export class DashboardComponent {
   }
 
   applications: Application[] = [];
-
+  applicationToUpdate?: Application;
   private userId: string | null = this.cookieService.get('id');
 
   ngOnInit() {
@@ -53,25 +53,6 @@ export class DashboardComponent {
         this.applications = applications;
       })
   }
-
-  addApplicationListener(app: Application) {
-    app.user = `/api/users/${this.userId}`
-    if (app.id){
-      this.applicationService.updateApplication(app)
-        .subscribe(el => {
-          this.getApplications();
-          this.toggleFormState();
-        })
-    }else{
-      this.applicationService.createApplication(app)
-        .subscribe(el => {
-          this.getApplications();
-          this.toggleFormState();
-        })
-    }
-  }
-
-  applicationToUpdate?: Application;
 
   updateApplication(app: Application) {
     this.applicationToUpdate = app;
