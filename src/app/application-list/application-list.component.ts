@@ -4,11 +4,13 @@ import {Application} from "../_Interfaces/application";
 import {DashboardComponent} from "../dashboard/dashboard.component";
 import {faEllipsis, faEnvelope, faLink, faPencil, faPhone, faTrash} from "@fortawesome/free-solid-svg-icons";
 import {DataFilters} from "../_Interfaces/dataFilters";
+import {PhoneNumberPipe} from "../_Pipes/phone-number.pipe"
 
 
 @Component({
   selector: 'app-application-list',
   templateUrl: './application-list.component.html',
+
 })
 export class ApplicationListComponent implements OnInit{
 

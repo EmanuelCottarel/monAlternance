@@ -23,6 +23,7 @@ import {JwtHelperService, JWT_OPTIONS} from "@auth0/angular-jwt";
 import { ReminderComponent } from './reminder/reminder.component';
 import { SettingsComponent } from './settings/settings.component';
 import { ProfileComponent } from './profile/profile.component';
+import { PhoneNumberPipe } from './_Pipes/phone-number.pipe';
 
 
 @NgModule({
@@ -39,6 +40,7 @@ import { ProfileComponent } from './profile/profile.component';
     ReminderComponent,
     SettingsComponent,
     ProfileComponent,
+    PhoneNumberPipe,
   ],
   imports: [
     BrowserModule,

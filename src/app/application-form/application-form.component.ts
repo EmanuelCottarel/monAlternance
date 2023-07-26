@@ -1,9 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {FormControl} from "@angular/forms";
 
 import {Application} from "../_Interfaces/application";
 import {ApplicationService} from "../_Services/application.service";
-import {NotificationService} from "../_Services/notification.service";
 import {applicationForm} from "../_Forms/formApplication";
 
 @Component({
@@ -17,14 +15,11 @@ export class ApplicationFormComponent implements OnInit {
   ) {
   }
 
-
   title: string = 'Créer une candidature';
   applicationForm = applicationForm;
 
-
   @Input() appToUpdate: Application | undefined;
   @Input() createApp?: boolean;
-  @Output() newApplicationEvent = new EventEmitter();
   @Output() closeFormEvent = new EventEmitter();
 
   ngOnInit() {
@@ -34,7 +29,6 @@ export class ApplicationFormComponent implements OnInit {
   }
 
   onSubmit() {
-
     if (this.appToUpdate) {
       this.applicationService.updateApplication(applicationForm.getRawValue(), this.appToUpdate.id).subscribe()
     } else {
