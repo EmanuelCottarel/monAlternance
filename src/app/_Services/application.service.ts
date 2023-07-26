@@ -42,8 +42,8 @@ export class ApplicationService extends AbstractService {
     ).pipe(catchError(this.handleError('Une erreur est survenue, veuillez réeesayer')));
   }
 
-  updateApplication(application: Application) {
-    return this.http.patch(`${this.baseUrl}/application/update/${application.id}`, application, {headers: new HttpHeaders({'Content-Type': 'application/merge-patch+json'})}).pipe(
+  updateApplication(application: Application, id ?: string) {
+    return this.http.patch(`${this.baseUrl}/application/update/${id}`, application, {headers: new HttpHeaders({'Content-Type': 'application/merge-patch+json'})}).pipe(
       tap(_ => {
         this.notificationService.showSuccess('Candidature mise à jour')
       })

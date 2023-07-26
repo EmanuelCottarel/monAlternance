@@ -12,13 +12,12 @@ import {DataFilters} from "../_Interfaces/dataFilters";
 })
 export class ApplicationListComponent implements OnInit{
 
+  applications!: Application[];
+
+  @Output() updateApplicationEvent = new EventEmitter();
   constructor(
     private applicationService: ApplicationService,
-    private dashboardComponent:DashboardComponent,
   ) {}
-
-  @Input() applications!: Application[];
-  @Output() updateApplicationEvent = new EventEmitter();
 
   protected readonly faPencil = faPencil;
   protected readonly faEnvelope = faEnvelope;
@@ -27,16 +26,14 @@ export class ApplicationListComponent implements OnInit{
   protected readonly faPhone = faPhone;
   protected readonly faEllipsis = faEllipsis
 
-
-  getApplications(filters?:DataFilters) {
+  ngOnInit() {
+    this.getApplications()
+  }
+  public getApplications(filters?:DataFilters) {
     this.applicationService.getApplicationsByUser(filters)
         .subscribe(applications => {
           this.applications = applications;
         })
-  }
-
-  ngOnInit() {
-    this.getApplications()
   }
 
   deleteApplication(app:Application){
@@ -48,10 +45,5 @@ export class ApplicationListComponent implements OnInit{
   updateApplication(app: Application){
     this.updateApplicationEvent.emit(app);
   }
-
-
-
-
-
 
 }

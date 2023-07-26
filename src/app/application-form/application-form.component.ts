@@ -14,7 +14,6 @@ export class ApplicationFormComponent implements OnInit {
 
   constructor(
     private applicationService: ApplicationService,
-    private notificationService: NotificationService,
   ) {
   }
 
@@ -36,15 +35,10 @@ export class ApplicationFormComponent implements OnInit {
 
   onSubmit() {
 
-    if (this.appToUpdate){
-      this.applicationForm.addControl('id', this.appToUpdate.id)
-      this.applicationService.updateApplication(applicationForm.getRawValue())
-          .subscribe(el => {
-          })
-    }else{
-      this.applicationService.createApplication(applicationForm.getRawValue())
-          .subscribe(el => {
-          })
+    if (this.appToUpdate) {
+      this.applicationService.updateApplication(applicationForm.getRawValue(), this.appToUpdate.id).subscribe()
+    } else {
+      this.applicationService.createApplication(applicationForm.getRawValue()).subscribe()
     }
     if (this.applicationForm.valid) {
       this.applicationForm.reset();
@@ -53,10 +47,8 @@ export class ApplicationFormComponent implements OnInit {
 
   ngOnChanges() {
     if (!this.createApp && this.appToUpdate) {
-      console.log(this.appToUpdate)
       this.applicationForm.patchValue(this.appToUpdate);
       this.applicationForm.controls['submitedAt'].setValue(this.appToUpdate.submitedAt?.toString().split('T')[0]);
-      this.applicationForm.addControl('id', new FormControl(this.appToUpdate.id))
       this.title = 'Modifier la candidature';
     }
   }

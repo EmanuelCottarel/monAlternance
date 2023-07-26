@@ -1,7 +1,7 @@
 import {User} from "./user";
 
 export interface Application {
-  id?: string | null,
+  id?: string,
   companyName: string,
   submitedAt?: Date;
   email?: string;

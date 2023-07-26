@@ -36,7 +36,6 @@ export class DashboardComponent {
   ) {
   }
 
-  applications: Application[] = [];
   applicationToUpdate?: Application;
 
   updateApplication(app: Application) {
