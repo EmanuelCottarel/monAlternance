@@ -1,7 +1,10 @@
 <h2 class="text-xl">Paramètres</h2>
 
-<form [formGroup]="settingForm">
-  <label for="timeToReminder">Nombre de jours avant relance:</label>
-  <input type="number" id="timeToReminder">
+<form [formGroup]="settingForm" class="flex flex-col">
+  <div class="flex">
+    <label for="timeToReminder">Nombre de jours avant relance:</label>
+    <input type="number" id="timeToReminder" class="border">
+  </div>
+  <input type="submit" value="Enregistrer" class="w-fit h-[50px] px-4 py-2 bg-cyan-700 text-white font-semibold mt-5">
 
 </form>
