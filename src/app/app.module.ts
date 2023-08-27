@@ -24,6 +24,8 @@ import { ReminderComponent } from './reminder/reminder.component';
 import { SettingsComponent } from './settings/settings.component';
 import { ProfileComponent } from './profile/profile.component';
 import { PhoneNumberPipe } from './_Pipes/phone-number.pipe';
+import {CdkDrag, CdkDropList} from "@angular/cdk/drag-drop";
+import {RequestInterceptor} from "./_Interceptors/request.interceptor";
 
 
 @NgModule({
@@ -42,20 +44,24 @@ import { PhoneNumberPipe } from './_Pipes/phone-number.pipe';
     ProfileComponent,
     PhoneNumberPipe,
   ],
-  imports: [
-    BrowserModule,
-    FontAwesomeModule,
-    AppRoutingModule,
-    FormsModule,
-    HttpClientModule,
-    BrowserAnimationsModule,
-    ToastrModule.forRoot(),
-    ReactiveFormsModule,
-    BrowserAnimationsModule
-  ],
+            imports: [
+              BrowserModule,
+              FontAwesomeModule,
+              AppRoutingModule,
+              FormsModule,
+              HttpClientModule,
+              BrowserAnimationsModule,
+              ToastrModule.forRoot(),
+              ReactiveFormsModule,
+              BrowserAnimationsModule,
+              CdkDropList,
+              CdkDrag,
+
+            ],
   providers: [
     CookieService,
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: RequestInterceptor, multi: true },
     { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
     JwtHelperService
   ],

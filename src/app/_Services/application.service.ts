@@ -8,6 +8,8 @@ import {catchError, tap} from "rxjs/operators";
 import {NotificationService} from "./notification.service";
 import {AbstractService} from "./abstract.service";
 import {ToastrService} from "ngx-toastr";
+import {list} from "postcss";
+import {ListIndex} from "../_Interfaces/list-index";
 
 type filterProperties = keyof DataFilters;
 
@@ -73,5 +75,9 @@ export class ApplicationService extends AbstractService {
         this.notificationService.showSuccess('La candidature a été supprimé', '');
       })
     ).pipe(catchError(this.handleError('Une erreur est survenue, veuillez réeesayer')))
+  }
+
+  saveIndex(listIndexes: ListIndex){
+    return this.http.patch(`${this.baseUrl}/application/update-index`, listIndexes)
   }
 }
