@@ -26,6 +26,10 @@ import { ProfileComponent } from './profile/profile.component';
 import { PhoneNumberPipe } from './_Pipes/phone-number.pipe';
 import {CdkDrag, CdkDropList} from "@angular/cdk/drag-drop";
 import {RequestInterceptor} from "./_Interceptors/request.interceptor";
+import {MatTabsModule} from "@angular/material/tabs";
+import {MatButtonModule} from "@angular/material/button";
+import {MatDialogModule} from "@angular/material/dialog";
+import { ShowApplicationDialogueComponent } from './show-application-dialogue/show-application-dialogue.component';
 
 
 @NgModule({
@@ -43,6 +47,7 @@ import {RequestInterceptor} from "./_Interceptors/request.interceptor";
     SettingsComponent,
     ProfileComponent,
     PhoneNumberPipe,
+    ShowApplicationDialogueComponent,
   ],
             imports: [
               BrowserModule,
@@ -56,6 +61,9 @@ import {RequestInterceptor} from "./_Interceptors/request.interceptor";
               BrowserAnimationsModule,
               CdkDropList,
               CdkDrag,
+              MatTabsModule,
+              MatButtonModule,
+              MatDialogModule
 
             ],
   providers: [

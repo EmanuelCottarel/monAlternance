@@ -1,0 +1,21 @@
+<div class="p-4">
+  <div class="flex justify-between">
+    <h2>{{data.app.companyName}}</h2>
+    <fa-icon (click)="closeDialog()" [icon]="faXmark" title="Fermer"
+             class="text-2xl cursor-pointer"></fa-icon>
+  </div>
+  <div class="flex gap-5">
+    <section class="w-1/2 flex flex-col">
+      <h3>Informations de contact</h3>
+      <ul class="flex flex-col">
+        <li><span>Email: </span>{{data.app.email}}</li>
+        <li><span>Téléphone: </span>{{data.app.phoneNumber}}</li>
+        <li><span>Site Web: </span>{{data.app.webSite}}</li>
+      </ul>
+
+    </section>
+    <section class="w-1/2 flex flex-col">
+      <h3>Historique de contact</h3>
+    </section>
+  </div>
+</div>

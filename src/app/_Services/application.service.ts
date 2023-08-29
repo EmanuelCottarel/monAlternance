@@ -19,16 +19,14 @@ type filterProperties = keyof DataFilters;
 export class ApplicationService extends AbstractService {
 
   constructor(
-    private http: HttpClient,
-    private cookieService: CookieService,
+    protected override http: HttpClient,
+    protected override cookieService: CookieService,
     protected override toastr: ToastrService,
     private notificationService: NotificationService
   ) {
-    super(toastr)
+    super(toastr, cookieService, http)
   }
 
-  private userId = this.cookieService.get('id');
-  private baseUrl = 'https://127.0.0.1:8000/api';
 
   private applicationUrl = 'https://127.0.0.1:8000/api/applications';
 

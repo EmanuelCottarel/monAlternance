@@ -1,9 +1,11 @@
 import {Component, EventEmitter, OnInit, Output,} from '@angular/core';
 import {ApplicationService} from '../_Services/application.service';
 import {Application} from "../_Interfaces/application";
-import {faEnvelope, faGripVertical, faLink, faPencil, faPhone, faTrash} from "@fortawesome/free-solid-svg-icons";
+import {faEnvelope, faEye, faGripVertical, faLink, faPencil, faPhone, faTrash} from "@fortawesome/free-solid-svg-icons";
 import {DataFilters} from "../_Interfaces/dataFilters";
-import {CdkDrag, CdkDragDrop, CdkDropList, moveItemInArray} from "@angular/cdk/drag-drop";
+import {CdkDragDrop, moveItemInArray} from "@angular/cdk/drag-drop";
+import {MatDialog} from "@angular/material/dialog";
+import {ShowApplicationDialogueComponent} from "../show-application-dialogue/show-application-dialogue.component";
 
 
 @Component({
@@ -20,6 +22,7 @@ export class ApplicationListComponent implements OnInit {
 
   constructor(
     private applicationService: ApplicationService,
+    public dialog: MatDialog
   ) {
   }
 
@@ -29,6 +32,7 @@ export class ApplicationListComponent implements OnInit {
   protected readonly faTrash = faTrash;
   protected readonly faPhone = faPhone;
   protected readonly faGrip = faGripVertical;
+  protected readonly faEye = faEye;
 
   ngOnInit() {
     this.getApplications()
@@ -52,15 +56,32 @@ export class ApplicationListComponent implements OnInit {
     this.updateApplicationEvent.emit(app);
   }
 
+  showApplication(app: Application) {
+
+  }
+
 
   drop(event: CdkDragDrop<string[]>) {
     moveItemInArray(this.applications, event.previousIndex, event.currentIndex);
     let listIndexes = {
-      "lastIndex" : event.previousIndex,
+      "lastIndex": event.previousIndex,
       "newIndex": event.currentIndex
     }
     this.applicationService.saveIndex(listIndexes).subscribe()
-    console.log(event);
+  }
+
+  openDialog(application: Application) {
+    const dialogRef = this.dialog.open(ShowApplicationDialogueComponent, {
+      data:
+        {app: application,
+        },
+      width: '800px'
+
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
   }
 
 }

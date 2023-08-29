@@ -1,13 +1,19 @@
 import { ToastrService } from "ngx-toastr";
-import { HttpErrorResponse } from "@angular/common/http";
+import {HttpClient, HttpErrorResponse} from "@angular/common/http";
 import { Observable, of } from "rxjs";
+import {CookieService} from "ngx-cookie-service";
 
 export abstract class AbstractService {
 
   protected constructor(
     protected toastr: ToastrService,
+    protected cookieService: CookieService,
+    protected http: HttpClient
   ) {
   }
+
+  protected userId = this.cookieService.get('id');
+  protected baseUrl = 'https://127.0.0.1:8000/api';
 
   protected handleError<T>(message?: string, result?: T){
     return (error: HttpErrorResponse): Observable<T> => {
