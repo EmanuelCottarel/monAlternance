@@ -1,4 +1,4 @@
-<div class="p-4">
+<div class="p-4 px-8">
   <div class="flex justify-between">
     <h2>{{data.app.companyName}}</h2>
     <fa-icon (click)="closeDialog()" [icon]="faXmark" title="Fermer"
@@ -7,15 +7,26 @@
   <div class="flex gap-5">
     <section class="w-1/2 flex flex-col">
       <h3>Informations de contact</h3>
-      <ul class="flex flex-col">
-        <li><span>Email: </span>{{data.app.email}}</li>
-        <li><span>Téléphone: </span>{{data.app.phoneNumber}}</li>
-        <li><span>Site Web: </span><a href="{{data.app.webSite}}">{{data.app.webSite}}</a></li>
+      <ul class="flex flex-col gap-3">
+        <li class="items-center"><fa-icon [icon]="faEnvelope" class="text-lg text-blue-500 mr-6"></fa-icon>{{data.app.email}}</li>
+        <li class="items-center"><fa-icon [icon]="faPhone" class="text-lg text-blue-500 mr-6"></fa-icon>{{data.app.phoneNumber}}</li>
+        <li class="items-center"><fa-icon [icon]="faLink" class="text-lg text-blue-500 mr-6"></fa-icon><a href="{{data.app.webSite}}">{{data.app.webSite}}</a></li>
       </ul>
 
     </section>
     <section class="w-1/2 flex flex-col">
       <h3>Historique de contact</h3>
+      <div *ngFor="let interaction of interactionHistory" class="flex flex-row">
+        <div class="flex items-center italic text-gray-700">{{interaction.date}}
+          <span class="flex justify-center items-center w-[14px] h-[14px] rounded-full bg-blue-500 relative left-[9px]">
+            <span class="w-[8px] h-[8px] rounded-full bg-white"></span>
+          </span>
+        </div>
+        <div class="flex flex-col pl-10 py-3 border-l-4 border-blue-500">
+          <div class="font-medium">{{interaction.title}}</div>
+          <div class="italic text-gray-700">{{interaction.type}}</div>
+        </div>
+      </div>
     </section>
   </div>
 </div>

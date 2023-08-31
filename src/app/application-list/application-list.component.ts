@@ -6,6 +6,8 @@ import {DataFilters} from "../_Interfaces/dataFilters";
 import {CdkDragDrop, moveItemInArray} from "@angular/cdk/drag-drop";
 import {MatDialog} from "@angular/material/dialog";
 import {ShowApplicationDialogueComponent} from "../show-application-dialogue/show-application-dialogue.component";
+import {InteractionService} from "../_Services/interaction.service";
+import {InteractionHistory} from "../_Interfaces/interaction-history";
 
 
 @Component({
@@ -17,12 +19,14 @@ import {ShowApplicationDialogueComponent} from "../show-application-dialogue/sho
 export class ApplicationListComponent implements OnInit {
 
   applications!: Application[];
+  interactionHistory?: InteractionHistory[];
 
   @Output() updateApplicationEvent = new EventEmitter();
 
   constructor(
     private applicationService: ApplicationService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private interactionService: InteractionService
   ) {
   }
 
@@ -56,11 +60,6 @@ export class ApplicationListComponent implements OnInit {
     this.updateApplicationEvent.emit(app);
   }
 
-  showApplication(app: Application) {
-
-  }
-
-
   drop(event: CdkDragDrop<string[]>) {
     moveItemInArray(this.applications, event.previousIndex, event.currentIndex);
     let listIndexes = {
@@ -70,18 +69,25 @@ export class ApplicationListComponent implements OnInit {
     this.applicationService.saveIndex(listIndexes).subscribe()
   }
 
+
   openDialog(application: Application) {
-    const dialogRef = this.dialog.open(ShowApplicationDialogueComponent, {
-      data:
-        {app: application,
-        },
-      width: '800px'
 
-    });
+    this.interactionService.getInteractionHistory(application).subscribe((interactionHistory) => {
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
-    });
+      const dialogRef = this.dialog.open(ShowApplicationDialogueComponent, {
+        data:
+          {
+            app: application,
+            history: interactionHistory
+          },
+        width: '800px'
+
+      });
+
+      dialogRef.afterClosed().subscribe(result => {
+        console.log(`Dialog result: ${result}`);
+      });
+    })
   }
 
 }
