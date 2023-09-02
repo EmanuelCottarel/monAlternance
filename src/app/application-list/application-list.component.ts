@@ -80,8 +80,8 @@ export class ApplicationListComponent implements OnInit {
             app: application,
             history: interactionHistory
           },
-        width: '800px'
-
+        width: '850px',
+        height: '800px'
       });
 
       dialogRef.afterClosed().subscribe(result => {
