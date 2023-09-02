@@ -30,6 +30,7 @@ import {MatTabsModule} from "@angular/material/tabs";
 import {MatButtonModule} from "@angular/material/button";
 import {MatDialogModule} from "@angular/material/dialog";
 import { ShowApplicationDialogueComponent } from './show-application-dialogue/show-application-dialogue.component';
+import { StatisticComponent } from './statistic/statistic.component';
 
 
 @NgModule({
@@ -48,6 +49,7 @@ import { ShowApplicationDialogueComponent } from './show-application-dialogue/sh
     ProfileComponent,
     PhoneNumberPipe,
     ShowApplicationDialogueComponent,
+    StatisticComponent,
   ],
             imports: [
               BrowserModule,
