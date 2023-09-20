@@ -10,6 +10,7 @@ import {ReminderComponent} from "./reminder/reminder.component";
 import {SettingsComponent} from "./settings/settings.component";
 import {ProfileComponent} from "./profile/profile.component";
 import {StatisticComponent} from "./statistic/statistic.component";
+import {CalendarComponent} from "./calendar/calendar.component";
 
 const routes: Routes = [
   {
@@ -18,6 +19,7 @@ const routes: Routes = [
       {path: 'reminder', component: ReminderComponent, canActivate: [authGuard]},
       {path: 'profile', component: ProfileComponent, canActivate: [authGuard]},
       {path: 'statistic', component: StatisticComponent, canActivate: [authGuard]},
+      {path: 'calendar', component: CalendarComponent, canActivate: [authGuard]},
 
     ]
   },

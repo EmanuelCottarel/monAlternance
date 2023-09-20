@@ -31,6 +31,8 @@ import {MatButtonModule} from "@angular/material/button";
 import {MatDialogModule} from "@angular/material/dialog";
 import { ShowApplicationDialogueComponent } from './show-application-dialogue/show-application-dialogue.component';
 import { StatisticComponent } from './statistic/statistic.component';
+import { CalendarComponent } from './calendar/calendar.component';
+import {FullCalendarComponent, FullCalendarModule} from "@fullcalendar/angular";
 
 
 @NgModule({
@@ -50,6 +52,7 @@ import { StatisticComponent } from './statistic/statistic.component';
     PhoneNumberPipe,
     ShowApplicationDialogueComponent,
     StatisticComponent,
+    CalendarComponent,
   ],
             imports: [
               BrowserModule,
@@ -65,7 +68,8 @@ import { StatisticComponent } from './statistic/statistic.component';
               CdkDrag,
               MatTabsModule,
               MatButtonModule,
-              MatDialogModule
+              MatDialogModule,
+              FullCalendarModule
 
             ],
   providers: [

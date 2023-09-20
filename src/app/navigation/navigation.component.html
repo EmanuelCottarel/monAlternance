@@ -28,6 +28,19 @@
       </a>
     </li>
     <li class="flex flex-col items-center">
+      <a routerLink="/calendar"
+         routerLinkActive #rlaCalendar="routerLinkActive"
+         title="Calendrier"
+         class="flex flex-col items-center">
+          <span
+            class="flex justify-center items-center p-2 h-10 w-10 rounded-full"
+            [ngClass]="rlaCalendar.isActive? 'link-active':'link-notActive'">
+            <fa-icon [icon]="faCalendar" class="text-lg"></fa-icon>
+          </span>
+        <span class="text-sm text-gray-500">Calendrier</span>
+      </a>
+    </li>
+    <li class="flex flex-col items-center">
       <a routerLink="/statistic"
          routerLinkActive #rlaStat="routerLinkActive"
          title="Statistiques"
