@@ -3,8 +3,8 @@
 >Projet en cours de développement
 
 ## Résumé
-MonAlternance est une application permettant d'organiser ses candidatures.
-Développement front en Angular/Typescript.
+MonAlternance est une application permettant d'organiser ses candidatures.  
+Développement front en Angular/Typescript.  
 Développement Back avec ApiPlatform.
 
 ## Vidéo de présentation
